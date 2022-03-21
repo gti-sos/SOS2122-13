@@ -56,3 +56,39 @@ app.post(BASE_API_URL + "/emigrants", (req, res) => {
     emigrants.push(req.body);
     res.sendStatus(201,"CREATED");
 });
+
+
+// Opcional Thomas Tejeda
+
+var immigrants = [
+    {
+        country: "spain",
+        year: "2019",
+        men: "2.913.747",
+        women: "3.190.456",
+        percentages: "12,90"
+    },
+    {
+        country: "japan",
+        year: "2017",
+        men: "1.044.113",
+        women: "1.277.363",
+        percentages: "1,83"
+    },
+    {
+        country: "italy",
+        year: "2015",
+        men: "2.637.798",
+        women: "3.167.530",
+        percentages: "9,57"
+    }
+];
+
+app.get(BASE_API_URL + "/immigrants", (req, res) => {
+    res.send(JSON.stringify(emigrants,null,2));
+});
+
+app.post(BASE_API_URL + "/immigrants", (req, res) => {
+    immigrants.push(req.body);
+    res.sendStatus(201,"CREATED");
+});
