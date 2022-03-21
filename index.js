@@ -85,7 +85,7 @@ var immigrants = [
 ];
 
 app.get(BASE_API_URL + "/immigrants", (req, res) => {
-    res.send(JSON.stringify(emigrants,null,2));
+    res.send(JSON.stringify(immigrants,null,2));
 });
 
 app.post(BASE_API_URL + "/immigrants", (req, res) => {
