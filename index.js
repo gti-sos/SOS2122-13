@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const BASE_API_URL = "/api/v1";
-const API_DOC_PORTAL = "https://docu..."
+const API_DOC_PORTAL = "https://web.postman.co/documentation/20113253-1367a446-b69f-410c-993f-777f01dba630"
 
 
 app.use(bodyParser.json());
