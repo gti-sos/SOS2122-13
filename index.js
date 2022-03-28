@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const BASE_API_URL = "/api/v1";
-const API_DOC_PORTAL = "https://web.postman.co/documentation/20113253-1367a446-b69f-410c-993f-777f01dba630"
+const API_DOC_PORTAL = "https://documenter.getpostman.com/view/20113253/UVyn3ytf"
 
 
 app.use(bodyParser.json());
@@ -28,7 +28,7 @@ app.listen(port, () => {
 
 var emigrants = [];
 
-app.get(BASE_API_URL + "emigrants/docs", (req, res) => {
+app.get(BASE_API_URL + "/emigrants/docs", (req, res) => {
     res.redirect(API_DOC_PORTAL);
 });
 
@@ -167,7 +167,7 @@ app.put(BASE_API_URL + "/emigrants", (req, res) => {
 });
 
 //PUT a un recurso en concreto
-app.put(BASE_API_URL + "/emigrants/spain", (req, res) => {
+app.put(BASE_API_URL + "/emigrants/:country/:year", (req, res) => {
     if (incorrect(req)){
         res.sendStatus(400, "BAD REQUEST")
     }else {
@@ -177,16 +177,16 @@ app.put(BASE_API_URL + "/emigrants/spain", (req, res) => {
         var filteredEmigrants = emigrants.filter((emigrant) => {
             return(emigrant.country == Country && emigrant.year == Year)
         })
-        var ind = emigrants.indexOf(filtered[0]);
+        var ind = emigrants.indexOf(filteredEmigrants[0]);
 
         if (filteredEmigrants == 0){
             res.sendStatus(404, "NOT FOUND");
         }else if(Country != Body.country || Year != Body.year){
             res.sendStatus(400, "BAD REQUEST");
         }else{
-            emigrants[i].men = Body.men;
-            emigrants[i].women = Body.women;
-            emigrants[i].percentages = Body.percentages;
+            emigrants[ind].men = Body.men;
+            emigrants[ind].women = Body.women;
+            emigrants[ind].percentages = Body.percentages;
             res.sendStatus(200, "OK");
         }
     }
