@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": " npx newman run ./tests/emigrantsBackend.json -e ./tests/env/local.json"
+    "test-emigrants": " npx newman run ./tests/emigrantsBackend.json -e ./tests/env/local.json",
+    "test": "npm run test-emigrants"
   },
   "repository": {
     "type": "git",
