@@ -46,7 +46,7 @@ module.exports.register = (app, db) => {
 
     // Celia Sánchez Gaitán
 
-    app.use(bodyParser.json());
+    //app.use(bodyParser.json());
 
     //Documentación
     app.get(BASE_API_URL + "/emigrants/docs", (req, res) => {
@@ -113,7 +113,21 @@ module.exports.register = (app, db) => {
         
     });
 
-    //POST al conjunto de recursos
+    function pagination(req, lista){
+        
+        const limit = req.query.limit;
+        const offset = req.query.offset;
+        var res = []
+
+        if(limit < 1 || offset < 0 || offset > lista.length){
+            res.push("ERROR")
+            return res
+        }
+
+        res = lista.slice(offset,parseInt(limit)+parseInt(offset));
+        return res;
+    };
+
     function incorrect(emigrant){
         return (Object.keys(emigrant.body).length != 5 ||
         emigrant.body.country == null ||
@@ -123,6 +137,8 @@ module.exports.register = (app, db) => {
         emigrant.body.percentages == null);
     }
 
+
+    //POST al conjunto de recursos
     app.post(BASE_API_URL + "/emigrants", (req, res) => {
         if (incorrect(req)){
             res.sendStatus(400, "BAD REQUEST")
