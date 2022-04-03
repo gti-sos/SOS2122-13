@@ -1,14 +1,19 @@
 
 const express = require ("express");
 const bodyParser = require("body-parser");
-
 const app = express();
+
 const port = process.env.PORT || 8080;
 const BASE_API_URL = "/api/v1";
 
-const emigrantsBackend = require("./src/emigrants/index.js");
-emigrantsBackend(app, BASE_API_URL, bodyParser);
+const Datastore = require("nedb");
 
+//Backend Celia Sánchez Gaitán
+const emigrantsBackend = require("./src/emigrants/index.js");
+emigrantsBackend(app, BASE_API_URL, bodyParser,db_emigrants);
+//Base Datos emigrants
+var db_emigrants = new Datastore();
+///
 
 app.use(bodyParser.json());
 app.use("/",express.static(`public`));
