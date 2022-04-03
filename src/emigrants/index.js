@@ -54,99 +54,227 @@ module.exports.register = (app, db) => {
     });
 
 
-    //GET para crear 5 datos
+    //Cargar datos iniciales
     app.get(BASE_API_URL + "/emigrants/loadInitialData", (req, res) => {
 
         db.find({}, function(err,filteredEmigrants){
 
             if(err){
                 res.sendStatus(500, "CLIENT ERROR");
-            
             }
+
             if(filteredEmigrants==0){
                 for(var i = 0; i<emigrants.length;i++){
                     db.insert(emigrants[i]);
                 }
                 res.sendStatus(200,"OK");
-                
             }
         })
     });
 
 
     //GET al conjunto de recursos
-    app.get(BASE_API_URL + "/emigrants", (req, res) => {
-        res.send(JSON.stringify(emigrants, null, 2));
+    app.get(BASE_API_URL  + "/emigrants",(req,res)=>{
+
+        var year = req.query.year;
+        var from = req.query.from;
+        var to   = req.query.to;
+    
+        for(var i = 0; i<Object.keys(req.query).length;i++){
+            var element = Object.keys(req.query)[i];
+            if(element != "year" && element != "from" && element != "to" && element != "limit" && element != "offset"){
+                res.sendStatus(400, "BAD REQUEST");  
+            }
+        }
+
+        if(from>to){
+            res.sendStatus(400, "BAD REQUEST");   
+        }
+    
+        db.find({},function(err, filteredEmigrants){
+    
+            if(err){
+                res.sendStatus(500, "CLIENT ERROR");   
+            }
+
+            // Año
+            if(year != null){
+                var filteredEmigrants = filteredEmigrants.filter((reg)=>
+                {
+                    return (reg.year == year);
+                });
+                if (filteredEmigrants==0){
+                    res.sendStatus(404, "NOT FOUND");     
+                }
+            }
+
+            // From To
+            if(from != null && to != null){
+                filteredEmigrants = filteredEmigrants.filter((reg)=>
+                {
+                    return (reg.year >= from && reg.year <=to);
+                });
+    
+                if (filteredEmigrants==0){
+                    res.sendStatus(404, "NOT FOUND");
+                }    
+            }
+            
+            if(req.query.limit != undefined || req.query.offset != undefined){
+                filteredEmigrants = pagination(req,filteredEmigrants);
+            }
+            filteredEmigrants.forEach((element)=>{
+                delete element._id;
+            });
+            res.send(JSON.stringify(filteredEmigrants,null,2));
+        });
+      
     });
 
     //GET a un recurso en concreto (país)
-    app.get(BASE_API_URL + "/emigrants/:country", (req, res) => {
+    app.get(BASE_API_URL  + "/emigrants/:country",(req, res)=>{
 
-        var emigrantCountry = req.params.country;
-        filteredEmigrants = emigrants.filter((emigrant)=> {
-            return (emigrant.country == emigrantCountry);
-        });
-
-        if(filteredEmigrants == 0){
-            res.sendStatus(404, "NOT FOUND");
-        }else{
-            res.send(JSON.stringify(filteredEmigrants[0],null,2));
+        var country =req.params.country
+        var from = req.query.from;
+        var to = req.query.to;
+    
+        for(var i = 0; i<Object.keys(req.query).length;i++){
+            var element = Object.keys(req.query)[i];
+            if(element != "from" && element != "to"){
+                res.sendStatus(400, "BAD REQUEST");
+                return;
+            }
         }
+    
+        if(from>to){
+            res.sendStatus(400, "BAD REQUEST"); 
+        }
+    
+        db.find({}, function(err,filteredEmigrants){
+                
+            if(err){
+                res.sendStatus(500, "CLIENT ERROR");
+                return;
+            }
+    
+            filteredEmigrants = filteredEmigrants.filter((reg)=>
+            {
+                return (reg.country == country);
+            });
+    
+    
+            if(from != null && to != null && from<=to){
+                filteredEmigrants = filteredEmigrants.filter((reg)=>
+                {
+                   return (reg.year >= from && reg.year <=to);
+                }); 
+                
+            }
         
+            if (filteredEmigrants==0){
+                res.sendStatus(404, "NOT FOUND");
+                return;
+            }
+            
+            if(req.query.limit != undefined || req.query.offset != undefined){
+                filteredEmigrants = pagination(req,filteredEmigrants);
+            }
+            filteredEmigrants.forEach((element)=>{
+                delete element._id;
+            });
+            res.send(JSON.stringify(filteredEmigrants,null,2));
+        });
+    
     });
 
     //GET a un recurso en concreto (país y año)
-    app.get(BASE_API_URL + "/emigrants/:country/:year", (req, res) => {
+    app.get(BASE_API_URL + "/emigrants/:country/:year",(req, res)=>{
 
-        var emigrantCountry = req.params.country;
-        var emigrantYear = req.params.year;
-        
-        filteredEmigrants = emigrants.filter((emigrant)=> {
-            return ((emigrant.country == emigrantCountry) && (emigrant.year == emigrantYear));
-        });
-
-        if(filteredEmigrants == 0){
-            res.sendStatus(404, "NOT FOUND");
-        }else{
+        var emigrantCountry =req.params.country
+        var emigrantYear = req.params.year
+    
+        db.find({},function(err, filteredEmigrants){
+    
+            if(err){
+                res.sendStatus(500, "ERROR EN CLIENTE");
+            }
+    
+            filteredEmigrants = filteredEmigrants.filter((reg)=>
+            {
+                return (reg.country == emigrantCountry && reg.year == emigrantYear);
+            });
+    
+            if (filteredEmigrants==0){
+                res.sendStatus(404, "NO EXISTE");
+            }
+            
+            //Pagination
+            if(req.query.limit != undefined || req.query.offset != undefined){
+                filteredEmigrants = pagination(req,filteredEmigrants);
+                res.send(JSON.stringify(filteredEmigrants,null,2));
+            }
+            filteredEmigrants.forEach((element)=>{
+                delete element._id;
+            });
             res.send(JSON.stringify(filteredEmigrants[0],null,2));
-        }
-        
+        });
+    
     });
 
+    function incorrect(req){
+        return (req.body.country == null |
+                req.body.year == null |
+                req.body.men == null |
+                req.body.women == null |
+                req.body.percentages == null);
+    };
+
+    function pagination(req, lista){
+
+        var res = [];
+        const limit = req.query.limit;
+        const offset = req.query.offset;
+        
+        if(limit < 1 || offset < 0 || offset > lista.length){
+            res.push("ERROR");
+            return res;
+        }
+    
+        res = lista.slice(offset,parseInt(limit)+parseInt(offset));
+        return res;
+    
+    };
+
+    
     //POST al conjunto de recursos
-    function incorrect(emigrant){
-        return (Object.keys(emigrant.body).length != 5 ||
-        emigrant.body.country == null ||
-        emigrant.body.year == null ||
-        emigrant.body.men == null ||
-        emigrant.body.women == null ||
-        emigrant.body.percentages == null);
-    }
 
     app.post(BASE_API_URL + "/emigrants", (req, res) => {
-        if (incorrect(req)){
-            res.sendStatus(400, "BAD REQUEST")
-        }
-        else {
-            filteredEmigrants = emigrants.filter((emigrant) => {
-                return (emigrant.country == req.body.country
-                    && emigrant.year == req.body.year
-                    && emigrant.men == req.body.men
-                    && emigrant.women == req.body.women
-                    && emigrant.percentages == req.body.percentages);
-            });
-            
-            existente = emigrants.filter((emigrant) => {
-                return (emigrant.year == req.body.year && emigrant.country == req.body.country);
-            })
 
-            if (existente != 0){
-                res.sendStatus(409, "CONFLICT");
-            }else{
-                emigrants.push(req.body);
-                res.sendStatus(201, "CREATED");
-            }
+        if(incorrect(req)){
+            res.sendStatus(400,"BAD REQUEST");
         }
+        else{
+            db.find({},function(err,filteredEmigrants){
+    
+                if(err){
+                    res.sendStatus(500, "CLIENT ERROR");
+                   
+                }
+    
+                filteredEmigrants = filteredEmigrants.filter((reg)=>
+                {
+                    return(req.body.country == reg.country && req.body.year == reg.year)
+                })
+            
+                if(filteredEmigrants.length != 0){
+                    res.sendStatus(409, "CONFLICT");
+                }else{
+                    db.insert(req.body);
+                    res.sendStatus(201, "CREATED");
+                }
+            });
+        }
+    
     });
 
     //POST a un recurso concreto (país)
@@ -161,52 +289,87 @@ module.exports.register = (app, db) => {
 
     //PUT a un recurso en concreto
     app.put(BASE_API_URL + "/emigrants/:country/:year", (req, res) => {
-        if (incorrect(req)){
-            res.sendStatus(400, "BAD REQUEST")
-        }else {
-            var Country = req.params.country;
-            var Year = req.params.year;
-            var Body = req.body;
-            var filteredEmigrants = emigrants.filter((emigrant) => {
-                return(emigrant.country == Country && emigrant.year == Year)
-            })
-            var ind = emigrants.indexOf(filteredEmigrants[0]);
-
-            if (filteredEmigrants == 0){
-                res.sendStatus(404, "NOT FOUND");
-            }else if(Country != Body.country || Year != Body.year){
-                res.sendStatus(400, "BAD REQUEST");
-            }else{
-                emigrants[ind].men = Body.men;
-                emigrants[ind].women = Body.women;
-                emigrants[ind].percentages = Body.percentages;
-                res.sendStatus(200, "OK");
+            if(incorrect(req)){
+                res.sendStatus(400,"BAD REQUEST");
             }
-        }
-    });
+        var Country = req.params.country;
+        var Year = req.params.year;
+        var Body = req.body; 
+
+        db.find({},function(err,filteredEmigrants){
+            if(err){
+                res.sendStatus(500, "CLIENT ERROR");
+                return;
+            }
+
+            //Si no existe...
+
+            filteredEmigrants = filteredEmigrants.filter((reg)=>
+            {
+                return (reg.country == Country && reg.year == Year);
+            });
+            if (filteredEmigrants==0){
+                res.sendStatus(404, "NOT FOUND");
+                return;
+            }
+
+            //Si los campos han cambiado...
+
+            if(Country != Body.country || Year != Body.year){
+                res.sendStatus(400,"BAD REQUEST");
+                return;
+            }
+
+            //Se hace el put
+                
+            db.update({$and:[{country: String(Country)}, {year: parseInt(Year)}]}, {$set: Body}, {},function(err, upd) {
+                if (err) {
+                    res.sendStatus(500, "CLIENT ERROR");
+                    return;
+                }else{
+                    res.sendStatus(200, "UPDATED");
+                    return;
+                }
+            });
+        });
+    }); 
 
     //DELETE al conjunto de recursos
     app.delete(BASE_API_URL + "/emigrants", (req, res) => {
-        emigrants = [];
-        res.sendStatus(200,"OK");
+        db.remove({}, { multi: true}, (err, rem)=>{
+            if (err){
+                res.sendStatus(500, "CLIENT ERROR");
+            }
+            res.sendStatus(200, "OK")
+        })
     });
 
     //DELETE a un estadística en concreto (país)
     app.delete(BASE_API_URL + "/emigrants/:country", (req, res) => {
 
-        var emigrantCountry = req.params.country;
+        var Country = req.params.country;   
+    
+        db.find({country: Country}, {}, (err, filteredEmigrants)=>{
 
-        filteredEmigrants = emigrants.filter((emigrant)=> {
-            return (emigrant.country == emigrantCountry);
-        });
-
-        if(filteredEmigrants == 0){
-            res.sendStatus(404, "NOT FOUND");
-        } else{
-            emigrants = emigrants.filter( (emigrant) => {
-                return ((emigrant.country != emigrantCountry));
+            if (err){
+                res.sendStatus(500,"ERROR EN CLIENTE");
+                return;
+            }
+            if(filteredEmigrants==0){
+                res.sendStatus(404,"NOT FOUND");
+                return;
+            }
+            db.remove({country: Country}, {}, (err, rem)=>{
+                if (err){
+                    res.sendStatus(500,"ERROR EN CLIENTE");
+                    return;
+                }
+            
+                res.sendStatus(200,"OK");
+                return;
+                
             });
-        }
-        res.sendStatus(200, "OK");
+        });
     });
-}
+
+};
