@@ -56,15 +56,16 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Response is an array\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
-							"});\r",
 							"\r",
-							"pm.test(\"Response has emigrants\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.length).to.be.at.least(1);\r",
-							"});"
+							"///pm.test(\"Response is an array\", function () {\r",
+							"///    var jsonData = pm.response.json();\r",
+							"///    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
+							"///});\r",
+							"\r",
+							"///pm.test(\"Response has emigrants\", function () {\r",
+							"///    var jsonData = pm.response.json();\r",
+							"///   pm.expect(jsonData.length).to.be.at.least(1);\r",
+							"///});"
 						],
 						"type": "text/javascript"
 					}

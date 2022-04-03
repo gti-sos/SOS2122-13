@@ -6,13 +6,14 @@ const app = express();
 const port = process.env.PORT || 8080;
 const BASE_API_URL = "/api/v1";
 
-const Datastore = require("nedb");
+
+//Base Datos emigrants
+const Datastore = require("nedb")
+ , db_emigrants = new Datastore();
 
 //Backend Celia Sánchez Gaitán
 const emigrantsBackend = require("./src/emigrants/index.js");
-emigrantsBackend(app, BASE_API_URL, bodyParser,db_emigrants);
-//Base Datos emigrants
-var db_emigrants = new Datastore();
+emigrantsBackend.register(app, db_emigrants);
 ///
 
 app.use(bodyParser.json());
