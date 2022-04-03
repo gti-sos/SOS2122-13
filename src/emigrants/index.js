@@ -1,12 +1,54 @@
-module.exports = (app, BASE_API_URL, bodyParser) => {
+const API_DOC_PORTAL = "https://documenter.getpostman.com/view/20113253/UVyn3ytf"
+const BASE_API_URL = "/api/v1";
+const bodyParser = require("body-parser");
+const res = require("express/lib/response");
+
+var emigrants = [
+    {
+        country: "spain",
+        year: "2019",
+        men: "666.443",
+        women: "778.449",
+        percentages: "3,05"
+    },
+    {
+        country: "japan",
+        year: "2017",
+        men: "379.52",
+        women: "452.348",
+        percentages: "0,66"
+    },
+    {
+        country: "mexico",
+        year: "2017",
+        men: "6.909.042",
+        women: "6.055.840",
+        percentages: "10,45"
+    },
+    {
+        country: "usa",
+        year: "2015",
+        men: "1.509.309",
+        women: "1.473.126",
+        percentages: "0,93"
+    },
+    {
+        country: "afganistan",
+        year: "2017",
+        men: "2.544.670",
+        women: "2.281.794",
+        percentages: "16,25"
+    }
+];
+
+
+module.exports.register = (app, db) => {
 
     // Celia Sánchez Gaitán
 
     app.use(bodyParser.json());
-   
-    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/20113253/UVyn3ytf"
-    var emigrants = [];
 
+    //Documentación
     app.get(BASE_API_URL + "/emigrants/docs", (req, res) => {
         res.redirect(API_DOC_PORTAL);
     });
@@ -14,49 +56,21 @@ module.exports = (app, BASE_API_URL, bodyParser) => {
 
     //GET para crear 5 datos
     app.get(BASE_API_URL + "/emigrants/loadInitialData", (req, res) => {
-        emigrants = [];
-        var initialData = [
-            {
-                country: "spain",
-                year: "2019",
-                men: "666.443",
-                women: "778.449",
-                percentages: "3,05"
-            },
-            {
-                country: "japan",
-                year: "2017",
-                men: "379.52",
-                women: "452.348",
-                percentages: "0,66"
-            },
-            {
-                country: "mexico",
-                year: "2017",
-                men: "6.909.042",
-                women: "6.055.840",
-                percentages: "10,45"
-            },
-            {
-                country: "usa",
-                year: "2015",
-                men: "1.509.309",
-                women: "1.473.126",
-                percentages: "0,93"
-            },
-            {
-                country: "afganistan",
-                year: "2017",
-                men: "2.544.670",
-                women: "2.281.794",
-                percentages: "16,25"
+
+        db.find({}, function(err,filteredEmigrants){
+
+            if(err){
+                res.sendStatus(500, "CLIENT ERROR");
+            
             }
-        ];
-        
-        initialData.forEach((e) => {
-            emigrants.push(e);
-        });
-        res.send(JSON.stringify(emigrants, null, 2));
+            if(filteredEmigrants==0){
+                for(var i = 0; i<emigrants.length;i++){
+                    db.insert(emigrants[i]);
+                }
+                res.sendStatus(200,"OK");
+                
+            }
+        })
     });
 
 
