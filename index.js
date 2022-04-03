@@ -12,7 +12,7 @@ const Datastore = require("nedb");
 const emigrantsBackend = require("./src/emigrants/index.js");
 emigrantsBackend(app, BASE_API_URL, bodyParser,db_emigrants);
 //Base Datos emigrants
-db_emigrants = new Datastore();
+var db_emigrants = new Datastore();
 ///
 
 app.use(bodyParser.json());
