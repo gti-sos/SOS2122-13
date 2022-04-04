@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "test-emigrants": " npx newman run ./tests/emigrantsBackend.json -e ./tests/env/local.json",
-    "test": "npm run test-emigrants",
     "test-immigrants": " npx newman run ./tests/immigrantsBackend.json -e ./tests/env/immigrantsLocal.json",
-    "testim": "npm run test-immigrants"
+    "test": "npm run test-immigrants"
+    
   },
   "repository": {
     "type": "git",
