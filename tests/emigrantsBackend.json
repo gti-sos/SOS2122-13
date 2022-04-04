@@ -31,15 +31,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -75,16 +69,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/loadInitialData",
+					"raw": "{{HOST}}{{API}}loadInitialData",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants",
-						"loadInitialData"
+						"{{HOST}}{{API}}loadInitialData"
 					]
 				}
 			},
@@ -99,7 +86,9 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -109,15 +98,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/spain",
+					"raw": "{{HOST}}{{API}}/spain",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"spain"
 					]
 				}
@@ -133,7 +118,14 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an Object\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(typeof jsonData == \"object\").to.eql(true);\r",
+							"});\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -143,15 +135,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/spain/2019",
+					"raw": "{{HOST}}{{API}}/spain/2019",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"spain",
 						"2019"
 					]
@@ -179,15 +167,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/pozoblanco",
+					"raw": "{{HOST}}{{API}}/pozoblanco",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"pozoblanco"
 					]
 				}
@@ -224,15 +208,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -267,15 +245,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -311,15 +283,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -355,15 +321,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -399,15 +359,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/spain",
+					"raw": "{{HOST}}{{API}}/spain",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"spain"
 					]
 				}
@@ -444,15 +400,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -488,15 +438,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/italy/2022",
+					"raw": "{{HOST}}{{API}}/italy/2022",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"italy",
 						"2022"
 					]
@@ -533,15 +479,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -577,15 +517,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/peru/2022",
+					"raw": "{{HOST}}{{API}}/peru/2022",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"peru",
 						"2022"
 					]
@@ -623,15 +559,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/italy/2022",
+					"raw": "{{HOST}}{{API}}/italy/2022",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"italy",
 						"2022"
 					]
@@ -660,15 +592,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants/spain",
+					"raw": "{{HOST}}{{API}}/spain",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{API}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"emigrants",
 						"spain"
 					]
 				}
@@ -704,15 +632,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
@@ -739,15 +661,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emigrants",
+					"raw": "{{HOST}}{{API}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"emigrants"
+						"{{HOST}}{{API}}"
 					]
 				}
 			},
