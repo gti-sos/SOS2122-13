@@ -69,9 +69,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}{{API}}loadInitialData",
+					"raw": "{{HOST}}{{API}}/loadInitialData",
 					"host": [
-						"{{HOST}}{{API}}loadInitialData"
+						"{{HOST}}{{API}}/loadInitialData"
 					]
 				}
 			},
