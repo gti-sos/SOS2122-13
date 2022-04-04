@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test-emigrants": " npx newman run ./tests/emigrantsBackend.json -e ./tests/env/local.json",
+    "test-emigrants": " npx newman run ./tests/emigrantsBackend.json -e ./tests/env/emigrantsVariables.json",
     "test-immigrants": " npx newman run ./tests/immigrantsBackend.json -e ./tests/env/immigrants_environment.json",
     "test": "npm run test-emigrants && test-immigrants"
     
