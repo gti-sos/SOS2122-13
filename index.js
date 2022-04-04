@@ -16,6 +16,15 @@ const emigrantsBackend = require("./src/emigrants/index.js");
 emigrantsBackend.register(app, db_emigrants);
 ///
 
+//Base Datos immigrants
+const Datastoreim = require("nedb")
+ , db_immigrants = new Datastore();
+
+//Backend Thomas Tejeda Gordon
+const immigrantsBackend = require("./src/immigrants/index.js");
+immigrantsBackend.register(app, db_immigrants);
+///
+
 app.use(bodyParser.json());
 app.use("/",express.static(`public`));
 
