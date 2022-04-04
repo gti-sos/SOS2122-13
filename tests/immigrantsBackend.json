@@ -1,0 +1,494 @@
+{
+	"info": {
+		"_postman_id": "e21a7c23-8eea-4c28-b86a-76b61b90667c",
+		"name": "SOS2122-13-TTG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET/immigrants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /immigrants/loadInitialData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/loadInitialData",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /immigrants/spain",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"spain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /immigrants/spain/2019",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain/2019",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"spain",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /immigrants/ecuador FAILED",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/ecuador",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"ecuador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /immigrants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2022\",\r\n    \"men\": \"939.693\",\r\n    \"women\": \"390.399\",\r\n    \"percentages\": \"9,36\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/immigrants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /immigrants CONFLICT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2022\",\r\n    \"men\": \"939.693\",\r\n    \"women\": \"390.399\",\r\n    \"percentages\": \"9,36\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /immigrants BAD REQUEST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2022\",\r\n    \"men\": \"939.693\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST/immigrants/spain NOT ALLOWED",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2022\",\r\n    \"men\": \"939.693\",\r\n    \"women\": \"390.399\",\r\n    \"percentages\": \"9,36\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"spain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /immigrants NOT ALLOWED",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /immigrants/italy/2022",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2022\",\r\n    \"men\": \"939.699\",\r\n    \"women\": \"390.393\",\r\n    \"percentages\": \"9,39\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/italy/2022",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"italy",
+						"2022"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /immigrants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /immigrants/peru/2022 NOT FOUND",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"peru\",\r\n    \"year\": \"2022\",\r\n    \"men\": \"939.699\",\r\n    \"women\": \"390.393\",\r\n    \"percentages\": \"9,39\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/peru/2022",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"peru",
+						"2022"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /immigrants/italy/2022 BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2016\",\r\n    \"men\": \"939.6567\",\r\n    \"women\": \"390.393\",\r\n    \"percentages\": \"9,39\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/italy/2022",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"italy",
+						"2022"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /immigrants/spain",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants",
+						"spain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /immigrants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /immigrants",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"immigrants"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
