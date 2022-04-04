@@ -11,15 +11,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -31,15 +25,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/loadInitialData",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/loadInitialData",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"loadInitialData"
 					]
 				}
@@ -52,15 +42,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/spain",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"spain"
 					]
 				}
@@ -73,15 +59,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain/2019",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/spain/2019",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"spain",
 						"2019"
 					]
@@ -106,15 +88,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/ecuador",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/ecuador",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"ecuador"
 					]
 				}
@@ -136,15 +114,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -156,15 +128,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -185,15 +151,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -214,15 +174,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -243,15 +197,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/spain",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"spain"
 					]
 				}
@@ -264,15 +214,9 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -293,15 +237,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/italy/2022",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/italy/2022",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"italy",
 						"2022"
 					]
@@ -315,15 +255,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -344,15 +278,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/peru/2022",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/peru/2022",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"peru",
 						"2022"
 					]
@@ -386,15 +316,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/italy/2022",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/italy/2022",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"italy",
 						"2022"
 					]
@@ -408,15 +334,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants/spain",
+					"raw": "{{HOST}}{{IMMIGRANTS}}/spain",
 					"host": [
-						"{{HOST}}"
+						"{{HOST}}{{IMMIGRANTS}}"
 					],
-					"port": "{{PORT}}",
 					"path": [
-						"api",
-						"v1",
-						"immigrants",
 						"spain"
 					]
 				}
@@ -429,15 +351,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
@@ -449,15 +365,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/immigrants",
+					"raw": "{{HOST}}{{IMMIGRANTS}}",
 					"host": [
-						"{{HOST}}"
-					],
-					"port": "{{PORT}}",
-					"path": [
-						"api",
-						"v1",
-						"immigrants"
+						"{{HOST}}{{IMMIGRANTS}}"
 					]
 				}
 			},
