@@ -5,14 +5,14 @@ const res = require("express/lib/response");
 
 var immigrants = [
     {
-        country: "spain",
+        country: "españa",
         year: "2019",
         men: "2.913.747",
         women: "3.190.456",
         percentages: "12,90"
     },
     {
-        country: "japan",
+        country: "japon",
         year: "2017",
         men: "1.044.113",
         women: "1.277.363",
@@ -26,7 +26,7 @@ var immigrants = [
         percentages: "0,99"
     },
     {
-        country: "usa",
+        country: "estados unidos",
         year: "2015",
         men: "23.446.873",
         women: "24.732.004",
