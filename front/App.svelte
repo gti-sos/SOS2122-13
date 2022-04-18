@@ -1,11 +1,14 @@
 <script>
 	import ImmigrantsTable from './ImmigrantsTable.svelte';
+	import EmigrantsTable from './EmigrantsTable.svelte';
 </script>
 
 <main>
-	<h1>DATOS DE INMIGRANTES</h1>
-	
+	<h1>DATOS DE INMIGRANTES y EMIGRANTES</h1>
+	<p>INMIGRANTES</p>
 	<ImmigrantsTable />
+	<p>EMIGRANTES</p>
+	<EmigrantsTable />
 
 </main>
 <!--
