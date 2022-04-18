@@ -10,7 +10,6 @@
     "test-emigrants": " npx newman run ./tests/emigrantsBackend.json -e ./tests/env/emigrantsVariables.json",
     "test-immigrants": " npx newman run ./tests/immigrantsBackend.json -e ./tests/env/immigrants_environment.json",
     "test": "npm run test-immigrants && npm run test-emigrants"
-    
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,8 @@
     "body-parser": "^1.19.2",
     "cool-ascii-faces": "^1.3.4",
     "express": "^4.17.3",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "svelte-spa-router": "^3.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -38,5 +38,4 @@
     "rollup-plugin-terser": "^7.0.0",
     "svelte": "^3.0.0"
   }
-
 }
