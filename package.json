@@ -26,7 +26,11 @@
     "cool-ascii-faces": "^1.3.4",
     "express": "^4.17.3",
     "nedb": "^1.8.0",
+<<<<<<< HEAD
     "svelte-spa-router": "3.2.0"
+=======
+    "svelte-spa-router": "^3.2.0"
+>>>>>>> 3621d1b0373ea940c2b652b718c5b61e20d26fa9
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

@@ -1,16 +1,21 @@
 <script>
+	import Router from "svelte-spa-router";
+	import Home from "./Home.svelte";
 	import ImmigrantsTable from './ImmigrantsTable.svelte';
 	import EmigrantsTable from './EmigrantsTable.svelte';
+
+	const routes = {
+		"/": Home,
+		"./ImmigrantsTable.svelte" : ImmigrantsTable,
+		"./EmigrantsTable.svelte" : EmigrantsTable
+		
+	};
 </script>
 
 <main>
-	<h1>DATOS DE INMIGRANTES y EMIGRANTES</h1>
-	<p>INMIGRANTES</p>
-	<ImmigrantsTable />
-	<p>EMIGRANTES</p>
-	<EmigrantsTable />
-
+	<Router {routes} />
 </main>
+
 <!--
 <style>
 	main {
@@ -40,3 +45,4 @@
 	}
 </style>
 -->
+
