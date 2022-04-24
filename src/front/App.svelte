@@ -1,7 +1,8 @@
 <script>
 	import Router from "svelte-spa-router";
 	import Home from "./Home.svelte";
-	import ImmigrantsTable from './immigrants/ImmigrantsTable.svelte';
+	import Immigrants from './immigrants/Immigrants.svelte';
+	import EditImmigrants from "./immigrants/EditImmigrants.svelte";
 	import Emigrants from "./emigrants/Emigrants.svelte";
 	import EditEmigrants from "./emigrants/EditEmigrants.svelte";
 
@@ -9,7 +10,8 @@
 
 		"/": Home,
 
-		"/ImmigrantsTable.svelte" : ImmigrantsTable,
+		"/immigrants" : Immigrants,
+		"/immigrants/:country/:year" : EditImmigrants,
 
 		"/emigrants" : Emigrants,
 		"/emigrants/:country/:year" : EditEmigrants
