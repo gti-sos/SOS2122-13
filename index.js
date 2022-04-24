@@ -22,8 +22,11 @@ emigrantsBackendV2.register(app);
 ///
 
 //Backend Thomas Tejeda Gordon
-const immigrantsBackend = require("./src/back/immigrants/index.js");
-immigrantsBackend.register(app, db_immigrants);
+const immigrantsBackendV1 = require("./src/back/immigrants/v1/index.js");
+immigrantsBackendV1.register(app, db_immigrants);
+
+const immigrantsBackendV2 = require("./src/back/immigrants/v2/index.js");
+immigrantsBackendV2.register(app, db_immigrants);
 ///
 
 app.use(bodyParser.json());
