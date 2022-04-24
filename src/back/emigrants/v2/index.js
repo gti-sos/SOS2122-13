@@ -235,7 +235,7 @@ module.exports.register = (app) => {
                     console.log(`NEW DELETE request to <${reqcountry}>, <${reqyear}>`);
                     res.status(200).send("The corresponding data for " + reqcountry + " and " + reqyear + " has been deleted");
                 }else{
-                    console.log("Data not found");
+                    console.log("Data not foundd");
                     res.sendStatus(404);
                 }
             }
