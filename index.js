@@ -14,12 +14,15 @@ const Datastore = require("nedb")
    db_immigrants = new Datastore();
 
 //Backend Celia Sánchez Gaitán
-const emigrantsBackend = require("./src/emigrants/index.js");
-emigrantsBackend.register(app, db_emigrants);
+const emigrantsBackendV1 = require("./src/back/emigrants/v1/index.js");
+emigrantsBackendV1.register(app,db_emigrants);
+
+const emigrantsBackendV2 = require("./src/back/emigrants/v2/index.js");
+emigrantsBackendV2.register(app);
 ///
 
 //Backend Thomas Tejeda Gordon
-const immigrantsBackend = require("./src/immigrants/index.js");
+const immigrantsBackend = require("./src/back/immigrants/index.js");
 immigrantsBackend.register(app, db_immigrants);
 ///
 
