@@ -53,6 +53,7 @@ module.exports.register = (app, db) => {
         res.redirect(API_DOC_PORTAL);
     });
 
+   
 
     //Cargar datos iniciales
     app.get(BASE_API_URL + "/emigrants/loadInitialData", (req, res) => {
