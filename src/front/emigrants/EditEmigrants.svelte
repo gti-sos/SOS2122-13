@@ -1,5 +1,4 @@
 <script>
-
     import { onMount }from "svelte";
     import { pop }from "svelte-spa-router";
     import Table from "sveltestrap/src/Table.svelte"; 

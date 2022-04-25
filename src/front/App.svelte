@@ -8,7 +8,7 @@
 
 	const routes = {
 
-		"/": Home,
+		"/info": Home,
 
 		"/immigrants" : Immigrants,
 		"/immigrants/:country/:year" : EditImmigrants,
