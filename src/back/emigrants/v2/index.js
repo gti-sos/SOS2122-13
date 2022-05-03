@@ -442,12 +442,15 @@ module.exports.register = (app, db) => {
                 return;
             }
 
+           
+
             if(Country != Body.country || Year != Body.year){
                 res.sendStatus(400,"BAD REQUEST");
                 return;
             }
 
             //Se hace el put
+                
             db.update({$and:[{country: String(Country)}, {year: parseInt(Year)}]}, {$set: Body}, {},function(err, upd) {
                 if (err) {
                     res.sendStatus(500, "CLIENT ERROR");

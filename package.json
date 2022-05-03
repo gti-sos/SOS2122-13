@@ -9,7 +9,7 @@
     "start": "node index.js",
     "test-emigrants": " npx newman run ./tests/emigrantsBackend.json -e ./tests/env/emigrantsVariables.json",
     "test-immigrants": " npx newman run ./tests/immigrantsBackend.json -e ./tests/env/immigrants_environment.json",
-    "test": "npm run test-immigrants && npm run test-emigrants"
+    "test": "npm run test-emigrants && npm run test-immigrants"
   },
   "repository": {
     "type": "git",
