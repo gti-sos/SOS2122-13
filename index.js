@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const port = process.env.PORT || 8080;
-const BASE_API_URL = "/api/v1";
 
 
 //Base Datos
@@ -18,7 +17,7 @@ const emigrantsBackendV1 = require("./src/back/emigrants/v1/index.js");
 emigrantsBackendV1.register(app,db_emigrants);
 
 const emigrantsBackendV2 = require("./src/back/emigrants/v2/index.js");
-emigrantsBackendV2.register(app);
+emigrantsBackendV2.register(app,db_emigrants);
 ///
 
 //Backend Thomas Tejeda Gordon

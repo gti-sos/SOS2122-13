@@ -45,7 +45,7 @@
                     method:"PUT",
                     body : JSON.stringify({
                         country: params.country,
-                        year: parseInt(params.year),
+                        year: params.year,
                         men: parseFloat(updatedMen),
                         women: parseFloat(updatedWomen),
                         percentages: parseFloat(updatedPercentages)

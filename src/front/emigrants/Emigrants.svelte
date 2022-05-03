@@ -194,7 +194,7 @@
         {#each entries as entry}
             <tr>
                 
-                <td><a href="api/v1/emigrants/{entry.country}/{entry.year}">{entry.country}</a></td>
+                <td><a href="api/v2/emigrants/{entry.country}/{entry.year}">{entry.country}</a></td>
                 <td>{entry.year}</td>
                 <td>{entry.men}</td>
                 <td>{entry.women}</td>
