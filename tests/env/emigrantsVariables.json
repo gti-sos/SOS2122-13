@@ -16,7 +16,7 @@
 		},
 		{
 			"key": "API",
-			"value": "/api/v2/emigrants",
+			"value": "/api/v1/emigrants",
 			"type": "default",
 			"enabled": true
 		}
