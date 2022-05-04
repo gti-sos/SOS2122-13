@@ -339,7 +339,7 @@ module.exports.register = (app, db) => {
     app.delete(BASE_API_URL + "/emigrants", (req, res) => {
         db.remove({}, { multi: true}, (err, rem)=>{
             if (err){
-                res.sendStatus(500, "CLIENT ERROR");
+                res.sendStatus(500, "CLIENT ERRORR");
             }
             res.sendStatus(200, "OK")
         })
