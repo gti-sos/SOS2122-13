@@ -345,13 +345,13 @@ module.exports.register = (app, db) => {
         })
     });
 
-    //DELETE a un estadística en concreto (país)
+    //DELETE a un estadística en concreto (país y año)
     app.delete(BASE_API_URL + "/emigrants/:country/:year", (req, res) => {
 
-        var Country = req.params.country;
-        var Year = req.params.year;  
+        var Country = req.params.country;   
+        var Year = req.params.year;
     
-        db.find({country: Country, year: parseInt(Year)}, {}, (err, filteredEmigrants)=>{
+        db.find({country: Country, year: Year}, {}, (err, filteredEmigrants)=>{
 
             if (err){
                 res.sendStatus(500,"ERROR EN CLIENTE");
@@ -361,7 +361,7 @@ module.exports.register = (app, db) => {
                 res.sendStatus(404,"NOT FOUND");
                 return;
             }
-            db.remove({country: Country, year: parseInt(Year)}, {}, (err, rem)=>{
+            db.remove({country: Country, year: Year}, {}, (err, rem)=>{
                 if (err){
                     res.sendStatus(500,"ERROR EN CLIENTE");
                     return;

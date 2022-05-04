@@ -349,7 +349,7 @@ module.exports.register = (app, db) => {
                 return;
             }
             if(filteredImmigrants==0){
-                res.sendStatus(404,"NOT FOUND");
+                res.sendStatus(404,"NOT FOUNDD");
                 return;
             }
             db.remove({country: Country}, {}, (err, rem)=>{
