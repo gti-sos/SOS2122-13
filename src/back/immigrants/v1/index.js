@@ -338,30 +338,24 @@ module.exports.register = (app, db) => {
     });
 
     //DELETE a un estadística en concreto (país)
-    app.delete(BASE_API_URL + "/immigrants/:country", (req, res) => {
+    app.delete(BASE_API_URL + "/immigrants/:country/:year", (req,res)=>{
 
-        var Country = req.params.country;   
-    
-        db.find({country: Country}, {}, (err, filteredImmigrants)=>{
+        var reqcountry = req.params.country;
+        var reqyear = parseInt(req.params.year);
 
-            if (err){
-                res.sendStatus(500,"ERROR EN CLIENTE");
-                return;
-            }
-            if(filteredImmigrants==0){
-                res.sendStatus(404,"NOT FOUND");
-                return;
-            }
-            db.remove({country: Country}, {}, (err, rem)=>{
-                if (err){
-                    res.sendStatus(500,"ERROR EN CLIENTE");
-                    return;
+        db.remove({country : reqcountry, year : reqyear},{multi:true}, (err, data) => {
+            if (err) {
+                console.error("ERROR in GET");
+                res.sendStatus(500);
+            } else {
+                if(data != 0){
+                    console.log(`NEW DELETE request to <${reqcountry}>, <${reqyear}>`);
+                    res.status(200).send("The corresponding data for " + reqcountry + " and " + reqyear + " has been deleted");
+                }else{
+                    console.log("Data not foundd");
+                    res.sendStatus(404);
                 }
-            
-                res.sendStatus(200,"OK");
-                return;
-                
-            });
+            }
         });
     });
 
