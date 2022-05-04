@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "1367a446-b69f-410c-993f-777f01dba630",
-		"name": "SOS2122-13-CSG",
+		"_postman_id": "ae06fb3c-6113-4daf-8360-691f5dbcf357",
+		"name": "SOS2122-13-CSG Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -48,18 +48,7 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"///pm.test(\"Response is an array\", function () {\r",
-							"///    var jsonData = pm.response.json();\r",
-							"///    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
-							"///});\r",
-							"\r",
-							"///pm.test(\"Response has emigrants\", function () {\r",
-							"///    var jsonData = pm.response.json();\r",
-							"///   pm.expect(jsonData.length).to.be.at.least(1);\r",
-							"///});"
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -71,7 +60,10 @@
 				"url": {
 					"raw": "{{HOST}}{{API}}/loadInitialData",
 					"host": [
-						"{{HOST}}{{API}}/loadInitialData"
+						"{{HOST}}{{API}}"
+					],
+					"path": [
+						"loadInitialData"
 					]
 				}
 			},
@@ -566,38 +558,6 @@
 					"path": [
 						"italy",
 						"2022"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE /emigrants/spain",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{HOST}}{{API}}/spain",
-					"host": [
-						"{{HOST}}{{API}}"
-					],
-					"path": [
-						"spain"
 					]
 				}
 			},
