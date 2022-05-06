@@ -204,7 +204,6 @@ module.exports.register = (app) => {
     });
 
     //DELETE al conjunto de recursos
-
     app.delete(BASE_API_URL + "/immigrants", (req,res) => {
 
         db.remove({}, {multi: true}, (err, numDataRemoved) => {
@@ -219,7 +218,6 @@ module.exports.register = (app) => {
     });
 
     //DELETE a un recursoa en concreto (país)
-
     app.delete(BASE_API_URL + "/immigrants/:country/:year", (req,res)=>{
 
         var reqcountry = req.params.country;

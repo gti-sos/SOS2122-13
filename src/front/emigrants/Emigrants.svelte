@@ -1,221 +1,377 @@
 <script>
     import { onMount } from 'svelte';
-    import Table from 'sveltestrap/src/Table.svelte';
-    import Button from 'sveltestrap/src/Button.svelte';
+	import Table from 'sveltestrap/src/Table.svelte';
+	import Button from 'sveltestrap/src/Button.svelte';
 	import { Alert } from 'sveltestrap';
-    
-    var BASE_API_URL = "/api/v2/emigrants";
 
-    let entries = [];
-    let visible = false;
-    let color = "danger";
+	var BASE_API_URL = "/api/v2/emigrants";
 
-	let data = {
+    let emigrant = [];
+	let color = "danger";
+
+	let limitPages = 0;
+	let offset = 0;
+	let limit = 10;
+	let from = null;
+	let to = null;
+	let countrySearch = "";
+
+	let newData = {
 		country: "",
-		year: null,
-		year: null,
-        men: null,
-        women: null,
-        percentages: null
+		year: "",
+		men: "",
+        women: "",
+        percentages: ""
 	}
 
-    let checkMSG = "";
-    let page = 1;
-    let totaldata=6;
-    
+	let checkMSG = null;
+	let nEntradas;
+	let visible = false;
+
+	
     onMount(getData);
 
-    //get la conjunto de recursos
+	//GET al conjunto de recursos
     async function getData(){
 
-        console.log("Fetching entries....");
-        const res = await fetch("/api/v2/emigrants"); 
+        console.log("Fetching emigrants data....");
+		let cadena = `/api/v2/emigrants?limit=${limit}&&offset=${offset*10}&&`;
+
+		if (from != null) {
+			cadena = cadena + `from=${from}&&`
+		}
+		if (to != null) {
+			cadena = cadena + `to=${to}&&`
+		}
+		console.log(cadena);
+
+        const res = await fetch(cadena); 
+
         if(res.ok){
-            console.log("Ok:");
+			let cadenaPagina = cadena.split(`limit=${limit}&&offset=${offset*10}`);
+			limPagesF(cadenaPagina[0]+cadenaPagina[1]);
             const data = await res.json();
-            entries = data;
-            console.log("Received: "+entries.length);
-        }else {
-                checkMSG= res.status + ": Recursos no encontrados ";
-                console.log("ERROR!");
-            }
+            emigrant = data;
+			nEntradas = emigrant.length;
+            console.log("Received: "+emigrant.length);
+        }else{
+			checkMSG = res.status;
+			console.log("ERROR!")
+		}
     }
-    //get para cargar los datos iniciales
-    async function loadStats() {
- 
-        console.log("Fetching emigrants data...");
-        await fetch(BASE_API_URL + "/loadInitialData");
+
+	//GET para cargar los datos iniciales
+	async function LoadData(){
+
+        console.log("Loading emigrants data...");
+		await fetch(BASE_API_URL + "/loadInitialData");
         const res = await fetch(BASE_API_URL + "?limit=10&offset=0");
         if (res.ok) {
             console.log("Ok:");
             const json = await res.json();
-            entries = json;
+            emigrant = json;
             visible = true;
-            totaldata=6;
-            console.log("Received " + entries.length + " entry data.");
+            nEntradas=6;
+            console.log("Received " + emigrant.length + " entry data.");
             color = "success";
-            checkMSG = "Datos cargados correctamente";
+            checkMSG = "Los datos iniciales han sido cargados correctamente";
         } else {
             color = "danger";
             checkMSG= res.status + ": " + "No se pueden cargar los datos";
-            console.log("ERROR! ");
+            console.log("ERROR!");
         }
     }
 
-    //Insertar un nuevo dato
+	//Límite de Páginas según los datos que tenemos
+	async function limPagesF(cadena){
+	
+        const res = await fetch(cadena,
+			{
+				method: "GET"
+			});
 
-    async function insertStat(){
-		 
-         console.log("Inserting inequality data...");
-         //Comprobamos que el año y la fecha no estén vacíos, el string vacio no es null
-         if (data.country == "" || data.year == null || data.men == null || data.women == null || data.percentages == null ) {
-             alert("Debe rellenar todos los campos");
-         }
-         else{
-             const res = await fetch("/api/v2/emigrants",{
-             method:"POST",
-             body:JSON.stringify(data),
-             headers:{
-                 "Content-Type": "application/json"
-             }
-             }).then(function (res) {
-                 if(res.status == 201){
-                    getData();
-                     console.log("Data introduced");
-                     errorMSG = 201;
-                 }
-                 else if(res.status == 400){
-                     window.alert("No se introdujo bien el dato");
-                     console.log("ERROR Data was not correctly introduced");
-                     errorMSG = 400;
-                 }
-                 else if(res.status == 409){
-                     console.log("ERROR");
-                     errorMSG = 409;
-                 }
-             });	
-         }
-     }
+			if(res.ok){
+				const data = await res.json();
+				limitPages = Math.floor(data.length/10);
+				if(limitPages === data.length/10){
+					limitPages = limitPages-1;
+				}
+        }
+	}
 
-    //Delete un recurso
+	//Insertar un nuevo dato
+	async function insertData(){
 
-    async function deleteStat(countryDelete, yearDelete) {
-        const res = await fetch(BASE_API_URL+ "/" + countryDelete + "/" + yearDelete, {
+        console.log("Inserting emigrant data...");
+
+        if (newData.country == "" || newData.year == null || newData.men == null || newData.women == null || newData.percentages == null) {
+            alert("Los campos no pueden estar vacios");
+        } else{
+
+			const res = await fetch(BASE_API_URL,{
+				method:"POST",
+				
+				body:JSON.stringify({
+					country: newData.country,
+					year: parseInt(newData.year),
+					men: parseFloat(newData.men),
+					women: parseFloat(newData.women),
+					percentages: parseFloat(newData.percentages)
+				}),
+				headers:{
+					"Content-Type": "application/json"
+			}
+		}).then(function (res) {
+
+				visible=true;
+
+			if (res.status == 201){
+					getData()
+					nEntradas++;
+					console.log("Data introduced");
+					color = "success";
+					checkMSG="Datos introducidos correctamente";
+
+			}else if(res.status == 409){
+				console.log("ERROR");
+				color = "danger";
+				checkMSG= "Ya existen datos para este país y año";
+				
+			}else if(res.status == 400){
+					console.log("ERROR");
+					color = "danger";
+					checkMSG= "Datos incorrectos";
+
+			
+                }
+            });	
+        }
+    }
+
+	//Delete un recurso
+	async function deleteData(countryD, yearD){
+
+		const res = await fetch(BASE_API_URL + "/" + countryD + "/" + yearD, {
             method: "DELETE"
         }).then(function (res) {
             visible = true;
-            getData();      
+            getData();   
+			   
             if (res.status==200) {
-                totaldata--;
-                errorMSG = 200.2;
-                console.log("Deleted " + countryDelete);            
-            }else if (res.status==404) {
-                errorMSG = 404;
-                console.log("DATA NOT FOUND");            
+                nEntradas--;
+                color = "success";
+                checkMSG = "Recurso "+countryD+" "+yearD+ " borrado correctamente";
+                console.log( countryD + " Deleted");      
+
+            } else if (res.status==404) {
+                color = "danger";
+                checkMSG = "No se ha encontrado el objeto " + countryD;
+                console.log("Resource NOT FOUND");  
+
             } else {
-                errorMSG= res.status;
+                color = "danger";
+                checkMSG= res.status + ": " + "No se pudo borrar el recurso";
                 console.log("ERROR!");
             }      
         });
     }
 
-    //DELETE todos los recursos
-    async function deleteALL() {
-		console.log("Deleting entry data...");
+	//DELETE todos los recursos
+	async function deleteAll(){
 
-		if (confirm("¿Está seguro de que desea eliminar todas los datos?")){
+        console.log("Deleting emigrant data...");
 
-			console.log("Deleting all entry data...");
+		if (confirm("¿Está seguro de que desea eliminar todos los datos?")){
+
+			console.log("Deleting emigrants data...");
 			const res = await fetch(BASE_API_URL, {
 				method: "DELETE"
 
 			}).then(function (res) {
                 visible=true;
-				if (res.ok && totaldata>0){
-                    totaldata = 0;
+				if (res.ok && nEntradas>0){
+                    nEntradas = 0;
 					getData();
 
                     color = "success";
-					checkMSG="Datos eliminados correctamente";
-					console.log("OK All data erased");
+					checkMSG="Todos los datos han sido eliminados correctamente";
+					console.log("OK");
 
 				} else if (totaldata == 0){
-                    console.log("ERROR Data was not erased");
+                    console.log("ERROR");
                     color = "danger";
-					checkMSG= "Todos los datos ya han sido borrados";
+					checkMSG= "No hay ninguna entrada";
+
                 } else{
-					console.log("ERROR Data was not erased");
+					console.log("ERROR");
                     color = "danger";
 					checkMSG= "No se han podido eliminar los datos";
 				}
 			});
 		}
 	}
+
+	//Búsqueda por país
+	async function busqueda (countrySearch){
+		if(countrySearch==null){
+            countrySearch="";
+        }
+		visible = true;
+        const res = await fetch(BASE_API_URL + "?country="+countrySearch)
+        
+		if (res.ok){
+			const json = await res.json();
+			emigrant = json;
+			console.log("Found "+ emigrant.length + " data");
+			if(emigrant.length==1){
+				color = "success"
+				checkMSG = "Se ha encontrado un dato para tu búsqueda";
+			}else{
+				color = "success"
+				checkMSG = "Se han encontrado " + emigrant.length + " datos para tu búsqueda";
+			}
+		}
+
+	}
+	
 </script>
 
 <main>
+   
+	<h1 style ="text-align: center;">Emigrantes</h1>
 
-    <h1 style ="text-align: center;">Tabla de datos de Emigrantes</h1>
+	{#await emigrant}
+		loading emigrants data...
+		{:then emigrant}
 
-        {#await entries}
-            Loading entry stats data...
-        {:then entries}
-        
-        <Alert color={color} isOpen={visible} toggle={() => (visible = false)}>
+		<Alert color={color} isOpen={visible} toggle={() => (visible = false)}>
             {#if checkMSG}
                 {checkMSG}
             {/if}
         </Alert>
 
-        <br>
+		<Table ALIGN="center">
 
-        <Table bordered responsive> 
-            <thead>
-                <tr>
-                    <th>Pais</th>
-                    <th>Año</th>
-                    <th>Hombres</th>
-                    <th>Mujeres</th>
-                    <th>Porcentaje</th>
-                    <th colspan="2">Acciones</th>
-                </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type = "text" placeholder="spain" bind:value="{data.country}"></td> 
-                <td><input type = "text" placeholder="2016" bind:value="{data.year}"></td> 
-                <td><input type = "number" placeholder="4.6" bind:value="{data.men}"></td>    
-                <td><input type = "number" placeholder="4" bind:value="{data.women}"></td>  
-                <td><input type = "number" placeholder="5" bind:value="{data.percentages}"></td>
+			<thead ALIGN="center">
+				<tr text-align="center">
+					<th >Búsqueda por país: </th>
+				</tr>
+			</thead>
+		
+			<tbody ALIGN="center">
+				<tr>
+					<td><input placeholder="País" type="text" bind:value="{countrySearch}"></td>
 
-                <td colspan="2" style="text-align: center;"><Button outline color="primary" on:click={insertStat}>Insertar</Button></td>  
-            </tr>
+					
+				</tr>
 
-        {#each entries as entry}
-            <tr>
-                
-                <td><a href="api/v1/emigrants/{entry.country}/{entry.year}">{entry.country}</a></td>
-                <td>{entry.year}</td>
-                <td>{entry.men}</td>
-                <td>{entry.women}</td>
-                <td>{entry.percentages}</td>
-                <td><Button outline color="danger" on:click="{deleteStat(entry.country, entry.year)}">Borrar</Button></td>
-                <td><a href="#/emigrants/{entry.country}/{entry.year}"><Button outline color="primary">Editar</Button></a></td>
-            </tr>
-                
-        {/each}
+			    <tr>
+					<div style="text-align:center">
+						<Button outline color="primary" on:click="{busqueda (countrySearch)}">Buscar</Button>
+					</div>
+				</tr>
 
-        </tbody>
-        <br>
+			</tbody>
 
-        </Table>
-        <Button color="success" on:click="{loadStats}">
-            Cargar datos inciales
-        </Button>
-        <Button color="danger" on:click="{deleteALL}">
-            Eliminar todo
-        </Button>
+			<thead ALIGN = "center">
+				<tr text-align="center">
+					<th >Búsqueda por rango de años: </th>
+				</tr>
+			</thead>
+		
+			<tbody ALIGN="center">
+				<tr>
+					<td><input placeholder="Fecha de Inicio" type="number"  bind:value="{from}"></td>
+				</tr>
+				<tr>
+					<td><input placeholder="Fecha de Fin" type="number"  bind:value="{to}"></td>
+				</tr>
 
+				<tr>
+					<td align="center"><Button outline color="primary" on:click="{()=>{
+						if (from == null || to == null) {
+							checkMSG="los campos no pueden estar vacíos";
+						}else{
+							getData();
+						}
+					}}">
+						Buscar
+						</Button>
+					</td>
+				</tr>
+			</tbody>
+			
+		</Table>
 
-        {/await} 
+		<br>
+		<br>
+		<h1 style ="text-align: center;">Tabla de datos de Emigrantes</h1>
+		<br>
+
+		<Table ALIGN="center" bordered responsive>
+			<thead>
+				<tr ALIGN="center">
+					<th>País</th>
+					<th>Año</th>
+					<th>Hombres</th>
+					<th>Mujeres</th>
+					<th>Porcentajes</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="text"  placeholder="spain" bind:value="{newData.country}"></td>
+					<td><input type="number"  placeholder="2010" bind:value="{newData.year}"></td>
+					<td><input type="number"  placeholder="4.9" bind:value="{newData.men}"></td>
+					<td><input type="number"  placeholder="7.1" bind:value="{newData.women}"></td>
+					<td><input type="number"  placeholder="3.5" bind:value="{newData.percentages}"></td>
+
+					<td style="text-align: center;">
+						<Button outline color="primary" on:click="{insertData}">
+						Añadir 
+						</Button>
+					</td>
+				</tr>
+				{#each emigrant as entry}
+					<tr>
+						<td>{entry.country}</td>
+						<td>{entry.year}</td>
+						<td>{entry.men}</td>
+						<td>{entry.women}</td>
+						<td>{entry.percentages}</td>
+						<td><Button outline color="danger" on:click={deleteData(entry.country,entry.year)}>
+							Borrar
+						</Button>
+						<td><Button outline color="warning" on:click={function (){
+							window.location.href = `/#/emigrants/${entry.country}/${entry.year}`
+						}}>
+							Editar
+						</Button>
+						
+						</td>
+					</tr>
+				{/each}
+			</tbody>
+
+		</Table>
+
+		<br>
+
+		<div align="center">
+
+			{#each Array(limitPages + 1) as _,page}
+			
+				<Button coutline color="success" on:click={()=>{offset = page;getData();}}>{page} </Button>&nbsp
+		
+			{/each}
+			</div>
+
+		<div align="center">
+			<Button outline color="success" on:click={LoadData}>Cargar datos iniciales</Button>&nbsp
+			<Button outline color="danger" on:click={deleteAll}>Eliminar todo</Button>
+		</div>
+		<br>
+		<br>
+	{/await}
+
 </main>

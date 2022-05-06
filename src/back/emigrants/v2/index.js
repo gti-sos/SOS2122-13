@@ -292,7 +292,6 @@ module.exports.register = (app, db) => {
                         return;
                     }
                 }
-                //Escogemos los fields correspondientes
                 filteredEmigrants = campos(req,filteredEmigrants);
             }
             res.send(JSON.stringify(filteredEmigrants, null, 2));
@@ -483,7 +482,7 @@ module.exports.register = (app, db) => {
         db.find({country: Country, year: Year}, {}, (err, filteredEmigrants)=>{
 
             if (err){
-                res.sendStatus(500,"ERROR EN CLIENTE");
+                res.sendStatus(500,"ERROR");
                 return;
             }
             if(filteredEmigrants==0){
