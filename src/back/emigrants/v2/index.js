@@ -11,37 +11,37 @@ var emigrants = [
     {
         country: "spain",
         year: "2019",
-        men: "666.443",
-        women: "778.449",
-        percentages: "3,05"
+        men: "666443",
+        women: "778449",
+        percentages: "3.05"
     },
     {
         country: "japan",
         year: "2017",
-        men: "379.52",
-        women: "452.348",
-        percentages: "0,66"
+        men: "379520",
+        women: "452348",
+        percentages: "0.66"
     },
     {
         country: "mexico",
         year: "2017",
-        men: "6.909.042",
-        women: "6.055.840",
-        percentages: "10,45"
+        men: "6909042",
+        women: "6055840",
+        percentages: "10.45"
     },
     {
         country: "usa",
         year: "2015",
-        men: "1.509.309",
-        women: "1.473.126",
-        percentages: "0,93"
+        men: "1509309",
+        women: "1473126",
+        percentages: "0.93"
     },
     {
         country: "afganistan",
         year: "2017",
-        men: "2.544.670",
-        women: "2.281.794",
-        percentages: "16,25"
+        men: "2544670",
+        women: "2281794",
+        percentages: "16.25"
     }
 ];
 

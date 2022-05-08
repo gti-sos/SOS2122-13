@@ -27,37 +27,37 @@ module.exports.register = (app) => {
             {
                 country: "españa",
                 year: "2019",
-                men: "2.913.747",
-                women: "3.190.456",
-                percentages: "12,90"
+                men: "2913747",
+                women: "3190456",
+                percentages: "12.90"
             },
             {
                 country: "japon",
                 year: "2017",
-                men: "1.044.113",
-                women: "1.277.363",
-                percentages: "1,83"
+                men: "1044113",
+                women: "1277363",
+                percentages: "1.83"
             },
             {
                 country: "mexico",
                 year: "2017",
-                men: "620.387",
-                women: "603.782",
-                percentages: "0,99"
+                men: "620387",
+                women: "603782",
+                percentages: "0.99"
             },
             {
                 country: "estados unidos",
                 year: "2015",
-                men: "23.446.873",
-                women: "24.732.004",
-                percentages: "15,01"
+                men: "23446873",
+                women: "24732004",
+                percentages: "15.01"
             },
             {
                 country: "afganistan",
                 year: "2017",
-                men: "66.738",
-                women: "66.874",
-                percentages: "0,45"
+                men: "66738",
+                women: "66874",
+                percentages: "0.45"
             }
         ];
 
