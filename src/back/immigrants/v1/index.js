@@ -1,4 +1,4 @@
-const API_DOC_PORTAL = "https://documenter.getpostman.com/view/20229866/UVysxbUT"
+const API_DOC_PORTAL = "https://documenter.getpostman.com/view/20113253/UVysxbUT"
 const BASE_API_URL = "/api/v1";
 const bodyParser = require("body-parser");
 const res = require("express/lib/response");
@@ -41,13 +41,19 @@ var immigrants = [
     }
 ];
 
+
 module.exports.register = (app, db) => {
+
+    
+
     app.use(bodyParser.json());
 
     //Documentación
     app.get(BASE_API_URL + "/immigrants/docs", (req, res) => {
         res.redirect(API_DOC_PORTAL);
     });
+
+   
 
     //Cargar datos iniciales
     app.get(BASE_API_URL + "/immigrants/loadInitialData", (req, res) => {
@@ -67,41 +73,42 @@ module.exports.register = (app, db) => {
         })
     });
 
+
     //GET al conjunto de recursos
     app.get(BASE_API_URL  + "/immigrants",(req,res)=>{
 
         var year = req.query.year;
         var from = req.query.from;
         var to   = req.query.to;
-        
+    
         for(var i = 0; i<Object.keys(req.query).length;i++){
             var element = Object.keys(req.query)[i];
             if(element != "year" && element != "from" && element != "to" && element != "limit" && element != "offset"){
                 res.sendStatus(400, "BAD REQUEST");  
             }
         }
-    
+
         if(from>to){
             res.sendStatus(400, "BAD REQUEST");   
         }
-        
+    
         db.find({},function(err, filteredImmigrants){
     
             if(err){
                 res.sendStatus(500, "CLIENT ERROR");   
             }
-    
+
             // Año
             if(year != null){
                 var filteredImmigrants = filteredImmigrants.filter((reg)=>
                 {
-                     return (reg.year == year);
+                    return (reg.year == year);
                 });
                 if (filteredImmigrants==0){
                     res.sendStatus(404, "NOT FOUND");     
                 }
             }
-    
+
             // From To
             if(from != null && to != null){
                 filteredImmigrants = filteredImmigrants.filter((reg)=>
@@ -184,8 +191,8 @@ module.exports.register = (app, db) => {
     //GET a un recurso en concreto (país y año)
     app.get(BASE_API_URL + "/immigrants/:country/:year",(req, res)=>{
 
-        var immigrantCountry =req.params.country
-        var immigrantYear = req.params.year
+        var emigrantCountry =req.params.country
+        var emigrantYear = req.params.year
     
         db.find({},function(err, filteredImmigrants){
     
@@ -195,7 +202,7 @@ module.exports.register = (app, db) => {
     
             filteredImmigrants = filteredImmigrants.filter((reg)=>
             {
-                return (reg.country == immigrantCountry && reg.year == immigrantYear);
+                return (reg.country == emigrantCountry && reg.year == emigrantYear);
             });
     
             if (filteredImmigrants==0){
@@ -239,6 +246,7 @@ module.exports.register = (app, db) => {
     
     };
 
+    
     //POST al conjunto de recursos
 
     app.post(BASE_API_URL + "/immigrants", (req, res) => {
@@ -282,77 +290,78 @@ module.exports.register = (app, db) => {
 
     //PUT a un recurso en concreto
     app.put(BASE_API_URL + "/immigrants/:country/:year", (req, res) => {
-        if(incorrect(req)){
-            res.sendStatus(400,"BAD REQUEST");
-        }
-    var Country = req.params.country;
-    var Year = req.params.year;
-    var Body = req.body; 
+            if(incorrect(req)){
+                res.sendStatus(400,"BAD REQUEST");
+            }
+        var Country = req.params.country;
+        var Year = req.params.year;
+        var Body = req.body; 
 
-    db.find({},function(err,filteredImmigrants){
-        if(err){
-            res.sendStatus(500, "CLIENT ERROR");
-            return;
-        }
-
-        //Si no existe...
-
-        filteredImmigrants = filteredImmigrants.filter((reg)=>
-        {
-            return (reg.country == Country && reg.year == Year);
-        });
-        if (filteredImmigrants==0){
-            res.sendStatus(404, "NOT FOUND");
-            return;
-        }
-
-        //Si los campos han cambiado...
-
-        if(Country != Body.country || Year != Body.year){
-            res.sendStatus(400,"BAD REQUEST");
-            return;
-        }
-
-        //Se hace el put
-            
-        db.update({$and:[{country: String(Country)}, {year: parseInt(Year)}]}, {$set: Body}, {},function(err, upd) {
-            if (err) {
+        db.find({},function(err,filteredImmigrants){
+            if(err){
                 res.sendStatus(500, "CLIENT ERROR");
                 return;
-            }else{
-                res.sendStatus(200, "UPDATED");
+            }
+
+            //Si no existe...
+
+            filteredImmigrants = filteredImmigrants.filter((reg)=>
+            {
+                return (reg.country == Country && reg.year == Year);
+            });
+            if (filteredImmigrants==0){
+                res.sendStatus(404, "NOT FOUND");
                 return;
             }
+
+            //Si los campos han cambiado...
+
+            if(Country != Body.country || Year != Body.year){
+                res.sendStatus(400,"BAD REQUEST");
+                return;
+            }
+
+            //Se hace el put
+                
+            db.update({$and:[{country: String(Country)}, {year: parseInt(Year)}]}, {$set: Body}, {},function(err, upd) {
+                if (err) {
+                    res.sendStatus(500, "CLIENT ERROR");
+                    return;
+                }else{
+                    res.sendStatus(200, "UPDATED");
+                    return;
+                }
+            });
         });
-    });
-});
+    }); 
 
     //DELETE al conjunto de recursos
     app.delete(BASE_API_URL + "/immigrants", (req, res) => {
         db.remove({}, { multi: true}, (err, rem)=>{
             if (err){
-                res.sendStatus(500, "CLIENT ERROR");
+                res.sendStatus(500, "CLIENT ERRORR");
             }
             res.sendStatus(200, "OK")
         })
     });
 
-    //DELETE a un estadística en concreto (país)
-    app.delete(BASE_API_URL + "/immigrants/:country", (req, res) => {
+    //DELETE a un estadística en concreto (país y año)
+    app.delete(BASE_API_URL + "/immigrants/:country/:year", (req, res) => {
 
         var Country = req.params.country;   
+        var Year = req.params.year;
     
-        db.find({country: Country}, {}, (err, filteredImmigrants)=>{
+        db.find({country: Country, year: Year}, {}, (err, filteredImmigrants)=>{
 
             if (err){
                 res.sendStatus(500,"ERROR EN CLIENTE");
                 return;
             }
             if(filteredImmigrants==0){
-                res.sendStatus(404,"NOT FOUNDD");
+                res.sendStatus(404,"NOT FOUND");
                 return;
             }
-            db.remove({country: Country}, {}, (err, rem)=>{
+            db.remove({country: Country, year: Year}, {}, (err, rem)=>{
                 if (err){
                     res.sendStatus(500,"ERROR EN CLIENTE");
                     return;
