@@ -8,15 +8,13 @@
 	import ImmigrantsGraph from "./immigrants/ImmigrantsGraph2.svelte";
 	import EmigrantsGraph from "./emigrants/EmigrantsGraph.svelte";
 	import EmigrantsGraph2 from "./emigrants/EmiGraph2.svelte";
-
-
 	import GeneralGraph from "./Graph.svelte";
 
 	const routes = {
 
 		"/info": Home,
 
-		"/graph": GeneralGraph,
+		"/graph/:country": GeneralGraph,
 
 		"/immigrants" : Immigrants,
 		"/immigrants/:country/:year" : EditImmigrants,

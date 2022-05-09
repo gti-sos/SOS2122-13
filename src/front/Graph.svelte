@@ -4,12 +4,17 @@
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
     
+    let codeError = null;
+
+
     const delay = ms => new Promise(res => setTimeout(res, ms));
   
     let country = params.country;
+
     let DataMenE = [];
     let DataWomenE = [];
     let DataPercentagesE = [];
+
     let DataMenI = [];
     let DataWomenI = [];
     let DataPercentagesI = [];
@@ -27,49 +32,64 @@
             res_emigrants = await fetch(`/api/v2/emigrants/${country}`);
             res_immigrants = await fetch(`/api/v2/immigrants/${country}`);
         }
+
         if (res_emigrants.ok && res_immigrants.ok) {
+
             const json_emigrants = await res_emigrants.json();
             const json_immigrants = await res_immigrants.json();
 
-            guardaDatosEmigrants(json_emigrants);
-            guardaDatosImmigrants(json_immigrants);
+            EmigrantsDatos(json_emigrants);
+            ImmigrantsDatos(json_immigrants);
 
             if(country==null){
+
                 DataMenE = [];
                 DataWomenE = [];
                 DataPercentagesE = [];
+
                 DataMenI = [];
                 DataWomenI = [];
                 DataPercentagesI = [];
             }
+
             console.log(json_emigrants);
             console.log(json_immigrants);
             country = null;
+
             await delay(1000);
             loadGraph();
+
         }else{
-            errorC = 404;
+
+            codeError = 404;
+
             DataMenE = [];
             DataWomenE = [];
             DataPercentagesE = [];
+
             DataMenI = [];
             DataWomenI = [];
             DataPercentagesI = [];
+
             await delay(1000);
             loadGraph();
         }
     }
     
-    async function guardaDatosEmigrants(json){
+    async function EmigrantsDatos(json){
+
         for(let i = 0; i<json.length; i++){
                 let aux = [];
                 aux = [];
+
                 aux.push(json[i].year);
                 aux.push(json[i].percentages);
                 DataMenE.push(aux);
+
                 aux.push(json[i].year);
                 aux.push(json[i].men);
                 DataWomenE.push(aux);
+
                 aux = [];
                 aux.push(json[i].year);
                 aux.push(json[i].women);
@@ -80,26 +100,31 @@
             console.log(DataPercentagesE);
             console.log(DataMenE);
     }
-    async function guardaDatosImmigrants(json){
+
+    async function ImmigrantsDatos(json){
+
         for(let i = 0; i<json.length; i++){
-                let aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].men);
-                DataMenI.push(aux);
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].women);
-                DataWomenI.push(aux);
-                
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].percentages);
-                DataPercentagesI.push(aux);
-            }
+
+            let aux = [];
+            aux.push(json[i].year);
+            aux.push(json[i].men);
+            DataMenI.push(aux);
+
+            aux = [];
+            aux.push(json[i].year);
+            aux.push(json[i].women);
+            DataWomenI.push(aux);
+            
+            aux = [];
+            aux.push(json[i].year);
+            aux.push(json[i].percentages);
+            DataPercentagesI.push(aux);
+        }
             console.log(DataMenI);
             console.log(DataWomenI);
             console.log(DataPercentagesI);
     }
+
     async function loadGraph(){
         
         Highcharts.chart('container', {
