@@ -9,7 +9,7 @@ const res = require("express/lib/response");
 
 var immigrants = [
     {
-        country: "españa",
+        country: "spain",
         year: "2019",
         men: "2.913.747",
         women: "3.190.456",
@@ -62,7 +62,7 @@ module.exports.register = (app, db) => {
                 res.sendStatus(500, "CLIENT ERROR");
             }
 
-            if(filteredEmigrants==0){
+            if(filteredImmigrants==0){
                 for(var i = 0; i<immigrants.length;i++){
                     db.insert(immigrants[i]);
                 }
@@ -316,7 +316,7 @@ module.exports.register = (app, db) => {
                 return (reg.country == immigrantCountry && reg.year == immigrantYear);
             });
     
-            if (filteredEmigrants==0){
+            if (filteredImmigrants==0){
                 res.sendStatus(404, "NO EXISTE");
             }
             

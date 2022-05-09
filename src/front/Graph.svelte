@@ -56,7 +56,7 @@
             console.log(json_immigrants);
             country = null;
 
-            await delay(1000);
+            await delay(3000);
             loadGraph();
 
         }else{
@@ -71,7 +71,7 @@
             DataWomenI = [];
             DataPercentagesI = [];
 
-            await delay(1000);
+            await delay(3000);
             loadGraph();
         }
     }
