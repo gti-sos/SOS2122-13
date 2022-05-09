@@ -117,6 +117,7 @@
 					men: parseFloat(newData.men),
 					women: parseFloat(newData.women),
 					percentages: parseFloat(newData.percentages)
+					
 				}),
 				headers:{
 					"Content-Type": "application/json"
@@ -124,6 +125,7 @@
 		}).then(function (res) {
 
 				visible=true;
+				console.log(country + year);
 
 			if (res.status == 201){
 					getData()
@@ -156,17 +158,17 @@
         }).then(function (res) {
             visible = true;
             getData();   
-			   
+
             if (res.status==200) {
                 nEntradas--;
                 color = "success";
-                checkMSG = "Recurso "+countryD+" "+yearD+ " borrado correctamente";
+                checkMSG = "Recurso "+countryD +" "+yearD+ " borrado correctamente";
                 console.log( countryD + " Deleted");      
 
             } else if (res.status==404) {
                 color = "danger";
                 checkMSG = "No se ha encontrado el objeto " + countryD;
-                console.log("Resource NOT FOUND");  
+                console.log("Resource NOT FOUNDD");  
 
             } else {
                 color = "danger";

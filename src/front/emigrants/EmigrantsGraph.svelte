@@ -8,7 +8,7 @@
     let women = [];
     let percentages = [];
  
-		let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
+	let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
     let cargados = false;
     async function loadChart() {
         console.log("Fetching data...");
@@ -23,11 +23,12 @@
             women.push(parseInt(stat.women));
             percentages.push(parseFloat(stat.percentages));
             });
+
             cargados=true;
         }
         
     console.log("inequality Chart data: " + emigrantsData);
-
+    
     Highcharts.chart('container', {
     chart: {
         type: 'bar'
@@ -88,9 +89,7 @@
           data: percentages
       }]
 });
-
     }
-
     onMount(loadChart);
 </script>
 
@@ -111,7 +110,7 @@
     <figure class="highcharts-figure">
         <div id="container"></div>
         <p class="highcharts-description">
-            Gráfico de barras que muestra el número de inmigrantes de cada país.
+            Gráfico de barras que muestra el número de emigrantes de cada país.
         </p>
     </figure>
 </main>

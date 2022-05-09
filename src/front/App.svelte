@@ -5,21 +5,27 @@
 	import EditImmigrants from "./immigrants/EditImmigrants.svelte";
 	import Emigrants from "./emigrants/Emigrants.svelte";
 	import EditEmigrants from "./emigrants/EditEmigrants.svelte";
-	//import MyGraph from "./MyGraph.svelte";
 	import ImmigrantsGraph from "./immigrants/ImmigrantsGraph2.svelte";
 	import EmigrantsGraph from "./emigrants/EmigrantsGraph.svelte";
+	import EmigrantsGraph2 from "./emigrants/EmiGraph2.svelte";
+
+
+	import GeneralGraph from "./Graph.svelte";
 
 	const routes = {
 
 		"/info": Home,
 
+		"/graph": GeneralGraph,
+
 		"/immigrants" : Immigrants,
 		"/immigrants/:country/:year" : EditImmigrants,
+		"/immigrants-graph": ImmigrantsGraph,
 
 		"/emigrants" : Emigrants,
 		"/emigrants/:country/:year" : EditEmigrants,
-		"/immigrants-graph": ImmigrantsGraph,
-		"/emigrants-graph": EmigrantsGraph
+		"/emigrants-graph": EmigrantsGraph,
+		"/emigrants-graph2": EmigrantsGraph2
 
 	};
 
