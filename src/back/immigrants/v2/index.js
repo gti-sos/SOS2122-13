@@ -9,39 +9,130 @@ const res = require("express/lib/response");
 
 var immigrants = [
     {
-        country: "spain",
-        year: "2019",
-        men: "2.913.747",
-        women: "3.190.456",
-        percentages: "12,90"
+        country: "españa",
+        year: 2019,
+        men: 2913747,
+        women: 3190456,
+        percentages: 12.90
     },
     {
-        country: "japon",
-        year: "2017",
-        men: "1.044.113",
-        women: "1.277.363",
-        percentages: "1,83"
+        country: "españa",
+        year: 2017,
+        men: 2892146,
+        women: 3054960,
+        percentages: 12.75
+    },
+    {
+        country: "españa",
+        year: 2015,
+        men: 2884000,
+        women: 3007208,
+        percentages: 12.69
+    },
+    {
+        country: "españa",
+        year: 2010,
+        men: 3238238,
+        women: 3041827,
+        percentages: 13.46
+    },
+    {
+        country: "francia",
+        year: 2019,
+        men: 4019290,
+        women: 4315585,
+        percentages: 12.35
+    },
+    {
+        country: "japan",
+        year: 2017,
+        men: 1044113,
+        women: 1277363,
+        percentages: 1.83
     },
     {
         country: "mexico",
-        year: "2017",
-        men: "620.387",
-        women: "603.782",
-        percentages: "0,99"
+        year: 2017,
+        men: 620387,
+        women: 603782,
+        percentages: 0.99
     },
     {
-        country: "estados unidos",
-        year: "2015",
-        men: "23.446.873",
-        women: "24.732.004",
-        percentages: "15,01"
+        country: "italia",
+        year: 2015,
+        men: 23446873,
+        women: 24732004,
+        percentages: 15.01
+    },
+    {
+        country: "usa",
+        year: 2015,
+        men: 23446873,
+        women: 24732004,
+        percentages: 15.01
     },
     {
         country: "afganistan",
-        year: "2017",
-        men: "66.738",
-        women: "66.874",
-        percentages: "0,45"
+        year: 2017,
+        men: 66738,
+        women: 66874,
+        percentages: 0.45
+    },
+    {
+        country: "malasia",
+        year: 2015,
+        men: 1996220,
+        women: 1284461,
+        percentages: 10.52
+    },
+    {
+        country: "alemania",
+        year: 2010,
+        men: 4848689,
+        women: 4963574,
+        percentages: 12.23
+    },
+    {
+        country: "portugal",
+        year: 2010,
+        men: 371536,
+        women: 391289,
+        percentages: 7.22
+    },
+    {
+        country: "albania",
+        year: 2010,
+        men: 26.901,
+        women: 25.883,
+        percentages: 1.82
+    },
+    {
+        country: "burkina-faso",
+        year: 2005,
+        men: 285871,
+        women: 311787,
+        percentages: 4.45
+    },
+    {
+        country: "belice",
+        year: 2005,
+        men: 21045,
+        women: 20379,
+        percentages: 14.59
+    },
+    {
+        country: "burundi",
+        year: 2000,
+        men: 61094,
+        women: 64534,
+        percentages: 1.88
+    },
+    {
+        country: "canadá",
+        year: 2000,
+        men: 2659135,
+        women: 2852779,
+        percentages: 17.96
     }
 ];
 

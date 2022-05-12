@@ -16,6 +16,27 @@ var emigrants = [
         percentages: 3.05
     },
     {
+        country: "españa",
+        year: 2017,
+        men: 609615,
+        women: 736247,
+        percentages: 2.88
+    },
+    {
+        country: "españa",
+        year: 2015,
+        men: 579112,
+        women: 691908,
+        percentages: 2.74
+    },
+    {
+        country: "españa",
+        year: 2010,
+        men: 489494,
+        women: 597058,
+        percentages: 2.33
+    },
+    {
         country: "francia",
         year: 2019,
         men: 1122580,

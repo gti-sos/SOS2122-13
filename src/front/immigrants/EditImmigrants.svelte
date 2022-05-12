@@ -1,49 +1,58 @@
 <script>
-
     import { onMount }from "svelte";
     import { pop }from "svelte-spa-router";
-    import Table from "sveltestrap/src/Table.svelte"; 
 	import Button from "sveltestrap/src/Button.svelte";
+    import Table from "sveltestrap/src/Table.svelte"; 
     import { Alert } from 'sveltestrap';
-
-    var BASE_API_URL = "/api/v2/immigrants";
 
     
     export let params = {};
 
-    let visible = false;
-    let color = "danger";
+    var BASE_API_URL= "/api/v2/immigrants";
+    
     
     let immigrants = {};
+    let updateCountry = "";
+    let updateYear = "";
     let updatedMen = "";
     let updatedWomen = "";
     let updatedPercentages = "";
-    let errorMsg = "";
-    
-    onMount(getStat);
-    
-    async function getStat(){
-        console.log("Fetching datas...");
+
+    let errorMSG = "";
+    let visible = false;
+    let color = "danger";
+
+
+    onMount(getData);
+
+
+    async function getData(){
+        console.log("Fetching immigrant data...");
+
         const res = await fetch(BASE_API_URL + "/" + params.country + "/" + params.year);
+
         if(res.ok){
             console.log("Ok");
             const json = await res.json();
             updatedMen = immigrants.updatedMen;
             updatedWomen = immigrants.updatedWomen;
             updatedPercentages = immigrants.updatedPercentages;
-            console.log("Recived data");
+            console.log("Recived immigrants data");
         }else{
-            visible = true;
             color = "danger"
-            errorMsg = "Error " + res.status + " : " + "Ningún recurso con los parametros " + params.country +" " + params.year;
-            console.log("ERROR" + errorMsg);
+            visible = true;
+            errorMSG = "Error " + res.status + " : " + "No existe ningún recurso con los parametros " +  params.country +" " + params.year;
+            console.log("ERROR" + errorMSG);
         }
     }
-    async function updateStat(){   
-                 
-            console.log("Editing life stats data...");
+    async function updateData(){ 
+
+            console.log("Editing immigrants data...");
+
             const res = await fetch(BASE_API_URL + "/" + params.country + "/" + params.year, {
+
                     method:"PUT",
+
                     body : JSON.stringify({
                         country: params.country,
                         year: parseInt(params.year),
@@ -55,31 +64,49 @@
                     headers:{
                         "Content-Type": "application/json"
                     }
+
                 }).then(function (res) {
+
                     visible = true;
+
                     if(res.status == 200){
-                        getStat(); 
+
+                        getData(); 
                         console.log("Data introduced");
                         color = "success";
-                        errorMsg="Recurso actualizado correctamente";
-                    }else{
-                        console.log("Data not edited");
-                        errorMsg= "Rellene todos los campos";
+                        errorMSG="Dato actualizado";
+
+                    }else if(res.status == 400){
+
+                        console.log("Data incorrect");
+                        errorMSG="Los campos se han introducido de manera incorrecta";
                     }
+                    else{
+                        
+                        console.log("Data not edited");
+                        errorMSG= "Debe completar todos los campos";
+                    }
+
                 });	
     }
+
 </script>
 
 <main>
 
     <Alert color={color} isOpen={visible} toggle={() => (visible = false)}>
-        {#if errorMsg}
-		    {errorMsg}
+        {#if errorMSG}
+		    {errorMSG}
 	    {/if}
     </Alert>
+    
+    <br>
 
-    <h1>Recurso '{params.country} , {params.year} ' listo para editar</h1>
+    <h1 ALIGN= "center"> Editar: {params.country}-{params.year}  </h1>
+    <br>
+
     <Table bordered>
+
         <thead>
             <tr>
                 <th>País</th>
@@ -87,9 +114,10 @@
                 <th>Hombres</th>
                 <th>Mujeres</th>
                 <th>Porcentaje</th>
-                <th>Acciones</th>
+                <th></th>
             </tr>
         </thead>
+
         <tbody>
             <tr>
                 <td>{params.country}</td>
@@ -97,10 +125,13 @@
                 <td><input bind:value="{updatedMen}"></td>
                 <td><input bind:value="{updatedWomen}"></td>
                 <td><input bind:value="{updatedPercentages}"></td>
-                <td><Button outline color="primary" on:click={updateStat}>Actualizar</Button></td>
+                <td><Button class="btn btn-success" on:click={updateData}>Actualizar</Button></td>
             </tr>
         </tbody>
     </Table>
 
-    <Button outline color="secondary" on:click="{pop}">Atrás</Button>
+    <div ALIGN = "center">
+
+        <Button class="btn btn-warning" on:click="{pop}">Atrás</Button>
+    </div>
 </main>

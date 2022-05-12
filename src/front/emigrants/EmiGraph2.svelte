@@ -12,7 +12,7 @@
     
     async function loadChart() {
         console.log("Fetching data...");
-        const res = await fetch(BASE_API_PATH + "/emigrants/loadInitialData");
+        const res = await fetch(BASE_API_PATH + "/emigrants");
        
         if (res.ok) {
             const data = await res.json();

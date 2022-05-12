@@ -11,7 +11,7 @@
     let cargados = false;
     async function loadChart() {
         console.log("Fetching data...");
-        const res = await fetch(BASE_API_PATH + "/immigrants/loadInitialData");
+        const res = await fetch(BASE_API_PATH + "/immigrants");
        
         if (res.ok) {
             const data = await res.json();
