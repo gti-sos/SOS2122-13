@@ -9,39 +9,109 @@ const res = require("express/lib/response");
 
 var emigrants = [
     {
-        country: "spain",
-        year: "2019",
-        men: "666443",
-        women: "778449",
-        percentages: "3.05"
+        country: "españa",
+        year: 2019,
+        men: 666443,
+        women: 778449,
+        percentages: 3.05
+    },
+    {
+        country: "francia",
+        year: 2019,
+        men: 1122580,
+        women: 1173954,
+        percentages: 3.40
     },
     {
         country: "japan",
-        year: "2017",
-        men: "379520",
-        women: "452348",
-        percentages: "0.66"
+        year: 2017,
+        men: 379520,
+        women: 452348,
+        percentages: 0.66
     },
     {
         country: "mexico",
-        year: "2017",
-        men: "6909042",
-        women: "6055840",
-        percentages: "10.45"
+        year: 2017,
+        men: 6909042,
+        women: 6055840,
+        percentages: 10.45
+    },
+    {
+        country: "italia",
+        year: 2015,
+        men: 1416897,
+        women: 1275167,
+        percentages: 4.44
     },
     {
         country: "usa",
-        year: "2015",
-        men: "1509309",
-        women: "1473126",
-        percentages: "0.93"
+        year: 2015,
+        men: 1509309,
+        women: 1473126,
+        percentages: 0.93
     },
     {
         country: "afganistan",
-        year: "2017",
-        men: "2544670",
-        women: "2281794",
-        percentages: "16.25"
+        year: 2017,
+        men: 2544670,
+        women: 2281794,
+        percentages: 16.25
+    },
+    {
+        country: "malasia",
+        year: 2015,
+        men: 826623,
+        women: 969140,
+        percentages: 4.76
+    },
+    {
+        country: "alemania",
+        year: 2010,
+        men: 1734554,
+        women: 1992779,
+        percentages: 4.65
+    },
+    {
+        country: "portugal",
+        year: 2010,
+        men: 999435,
+        women: 950957,
+        percentages: 18.54
+    },
+    {
+        country: "albania",
+        year: 2010,
+        men: 582786,
+        women: 537519,
+        percentages: 38.53
+    },
+    {
+        country: "burkina-faso",
+        year: 2005,
+        men: 766198,
+        women: 601000,
+        percentages: 10.19
+    },
+    {
+        country: "belice",
+        year: 2005,
+        men: 22263,
+        women: 29628,
+        percentages: 18.27
+    },
+    {
+        country: "burundi",
+        year: 2000,
+        men: 388446,
+        women: 370228,
+        percentages: 11.35
+    },
+    {
+        country: "canadá",
+        year: 2000,
+        men: 430966,
+        women: 717533,
+        percentages: 3.74
     }
 ];
 
@@ -378,12 +448,13 @@ module.exports.register = (app, db) => {
         if(incorrect(req)){
             res.sendStatus(400,"BAD REQUEST");
         }
+
         else{
+
             db.find({},function(err,filteredEmigrants){
     
                 if(err){
-                    res.sendStatus(500, "CLIENT ERROR");
-                   
+                    res.sendStatus(500, "ERROR");
                 }
     
                 filteredEmigrants = filteredEmigrants.filter((reg)=>
@@ -393,6 +464,8 @@ module.exports.register = (app, db) => {
             
                 if(filteredEmigrants.length != 0){
                     res.sendStatus(409, "CONFLICT");
+
+
                 }else{
                     db.insert(req.body);
                     res.sendStatus(201, "CREATED");
@@ -435,6 +508,7 @@ module.exports.register = (app, db) => {
             {
                 return (reg.country == Country && reg.year == Year);
             });
+
             if (filteredEmigrants==0){
                 res.sendStatus(404, "NOT FOUND");
                 return;
@@ -479,7 +553,7 @@ module.exports.register = (app, db) => {
         var Country = req.params.country;   
         var Year = req.params.year;
     
-        db.find({country: Country, year: Year}, {}, (err, filteredEmigrants)=>{
+        db.find({country: Country, year: parseInt(Year)}, {}, (err, filteredEmigrants)=>{
 
             if (err){
                 res.sendStatus(500,"ERROR");
@@ -489,7 +563,7 @@ module.exports.register = (app, db) => {
                 res.sendStatus(404,"NOT FOUND");
                 return;
             }
-            db.remove({country: Country, year: Year}, {}, (err, rem)=>{
+            db.remove({country: Country, year: parseInt(Year)}, {}, (err, rem)=>{
                 if (err){
                     res.sendStatus(500,"ERROR EN CLIENTE");
                     return;

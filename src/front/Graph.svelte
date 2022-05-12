@@ -6,7 +6,6 @@
     
     let codeError = null;
 
-
     const delay = ms => new Promise(res => setTimeout(res, ms));
   
     let country = params.country;

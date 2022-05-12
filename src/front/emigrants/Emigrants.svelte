@@ -11,7 +11,7 @@
 
 	let limitPages = 0;
 	let offset = 0;
-	let limit = 10;
+	let limit = 15;
 	let from = null;
 	let to = null;
 	let countrySearch = "";
@@ -101,51 +101,41 @@
 
 	//Insertar un nuevo dato
 	async function insertData(){
+		 
+         console.log("Inserting emigrant data...");
+         if (newData.country == "" || newData.year == null || newData.men == null || newData.women == null || newData.percentages == null ) {
+            alert("Todos los campos deber ser escritos");
+         }
 
-        console.log("Inserting emigrant data...");
+         else{
 
-        if (newData.country == "" || newData.year == null || newData.men == null || newData.women == null || newData.percentages == null) {
-            alert("Los campos no pueden estar vacios");
-        } else{
+             const res = await fetch("/api/v2/emigrants",
+			 {
+             method:"POST",
+             body:JSON.stringify(newData),
+             headers:{
+                 "Content-Type": "application/json"
+             }
 
-			const res = await fetch(BASE_API_URL,{
-				method:"POST",
-				
-				body:JSON.stringify({
-					country: newData.country,
-					year: parseInt(newData.year),
-					men: parseFloat(newData.men),
-					women: parseFloat(newData.women),
-					percentages: parseFloat(newData.percentages)
-					
-				}),
-				headers:{
-					"Content-Type": "application/json"
-			}
-		}).then(function (res) {
+             }).then(function (res) {
 
-				visible=true;
-				console.log(country + year);
+				if(res.status == 201){
+				getData();
+				nEntradas++;
+				console.log("Introduced");
+				checkMSG = "Los datos han sido introducidos correctamente";
+				}
 
-			if (res.status == 201){
-					getData()
-					nEntradas++;
-					console.log("Data introduced");
-					color = "success";
-					checkMSG="Datos introducidos correctamente";
-
-			}else if(res.status == 409){
+				else if(res.status == 400){
 				console.log("ERROR");
-				color = "danger";
-				checkMSG= "Ya existen datos para este país y año";
+				checkMSG = "Ya existe";
+				}
 				
-			}else if(res.status == 400){
-					console.log("ERROR");
-					color = "danger";
-					checkMSG= "Datos incorrectos";
+				else if(res.status == 409){
+				console.log("ERROR");
+				checkMSG = "Los datos son incorrectos";
 
-			
-                }
+				}
             });	
         }
     }
@@ -214,27 +204,32 @@
 	}
 
 	//Búsqueda por país
-	async function busqueda (countrySearch){
-		if(countrySearch==null){
-            countrySearch="";
-        }
-		visible = true;
-        const res = await fetch(BASE_API_URL + "?country="+countrySearch)
-        
-		if (res.ok){
-			const json = await res.json();
-			emigrant = json;
-			console.log("Found "+ emigrant.length + " data");
-			if(emigrant.length==1){
-				color = "success"
-				checkMSG = "Se ha encontrado un dato para tu búsqueda";
-			}else{
-				color = "success"
-				checkMSG = "Se han encontrado " + emigrant.length + " datos para tu búsqueda";
-			}
-		}
+	    async function search (sCountry){
+            
+            if(sCountry==null){
+                sCountry="";
+            }
 
-	}
+            visible = true;
+            const res = await fetch(BASE_API_URL + "?country="+ sCountry)
+            
+            if (res.ok){
+                const json = await res.json();
+                emigrant = json;
+
+                console.log("Found");
+
+                if(emigrant.length==1){
+
+                    color = "succes"
+                    checkMSG = "Dato encontrado";
+
+                }else{
+                    color = "success"
+                    checkMSG = "Se han encontrado " + emigrant.length + " datos";
+                }
+            }
+    }
 	
 </script>
 
@@ -264,12 +259,11 @@
 				<tr>
 					<td><input placeholder="País" type="text" bind:value="{countrySearch}"></td>
 
-					
 				</tr>
 
 			    <tr>
 					<div style="text-align:center">
-						<Button outline color="primary" on:click="{busqueda (countrySearch)}">Buscar</Button>
+						<Button outline color="primary" on:click="{search (countrySearch)}">Buscar</Button>
 					</div>
 				</tr>
 

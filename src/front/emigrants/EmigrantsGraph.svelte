@@ -10,7 +10,9 @@
  
 	let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
     let cargados = false;
+
     async function loadChart() {
+        
         console.log("Fetching data...");
         const res = await fetch(BASE_API_PATH + "/emigrants");
        

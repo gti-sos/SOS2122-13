@@ -68,17 +68,21 @@
                 }).then(function (res) {
 
                     visible = true;
+
                     if(res.status == 200){
+
                         getData(); 
                         console.log("Data introduced");
                         color = "success";
                         errorMSG="Dato actualizado";
 
                     }else if(res.status == 400){
+
                         console.log("Data incorrect");
                         errorMSG="Los campos se han introducido de manera incorrecta";
                     }
                     else{
+                        
                         console.log("Data not edited");
                         errorMSG= "Debe completar todos los campos";
                     }
