@@ -10,7 +10,7 @@
 		},
 		{
 			"key": "HOST",
-			"value": "http://localhost:8082",
+			"value": "https://sos2122-13.herokuapp.com",
 			"type": "default",
 			"enabled": true
 		},

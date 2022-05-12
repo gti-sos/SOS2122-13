@@ -514,7 +514,6 @@ module.exports.register = (app, db) => {
                 return;
             }
 
-           
 
             if(Country != Body.country || Year != Body.year){
                 res.sendStatus(400,"BAD REQUEST");

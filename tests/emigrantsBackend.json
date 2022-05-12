@@ -90,12 +90,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}{{API}}/spain",
+					"raw": "{{HOST}}{{API}}/españa",
 					"host": [
 						"{{HOST}}{{API}}"
 					],
 					"path": [
-						"spain"
+						"españa"
 					]
 				}
 			},
@@ -127,12 +127,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}{{API}}/spain/2019",
+					"raw": "{{HOST}}{{API}}/españa/2019",
 					"host": [
 						"{{HOST}}{{API}}"
 					],
 					"path": [
-						"spain",
+						"españa",
 						"2019"
 					]
 				}
@@ -240,6 +240,90 @@
 					"raw": "{{HOST}}{{API}}",
 					"host": [
 						"{{HOST}}{{API}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /emigrants/italia/2015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italia\",\r\n    \"year\": \"2015\",\r\n    \"men\": \"939.699\",\r\n    \"women\": \"390.393\",\r\n    \"percentages\": \"9,39\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}{{API}}/italia/2015",
+					"host": [
+						"{{HOST}}{{API}}"
+					],
+					"path": [
+						"italia",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /emigrants/italy/2021 BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"italia\",\r\n    \"year\": \"2018\",\r\n    \"men\": \"939.6567\",\r\n    \"women\": \"390.393\",\r\n    \"percentages\": \"9,39\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}{{API}}/italia/2015",
+					"host": [
+						"{{HOST}}{{API}}"
+					],
+					"path": [
+						"italia",
+						"2015"
 					]
 				}
 			},
@@ -401,48 +485,6 @@
 			"response": []
 		},
 		{
-			"name": "PUT /emigrants/italy/2022",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2022\",\r\n    \"men\": \"939.699\",\r\n    \"women\": \"390.393\",\r\n    \"percentages\": \"9,39\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{HOST}}{{API}}/italy/2022",
-					"host": [
-						"{{HOST}}{{API}}"
-					],
-					"path": [
-						"italy",
-						"2022"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "GET /emigrants",
 			"event": [
 				{
@@ -522,48 +564,6 @@
 			"response": []
 		},
 		{
-			"name": "PUT /emigrants/italy/2021 BAD REQUEST",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 400\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"country\": \"italy\",\r\n    \"year\": \"2016\",\r\n    \"men\": \"939.6567\",\r\n    \"women\": \"390.393\",\r\n    \"percentages\": \"9,39\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{HOST}}{{API}}/italy/2022",
-					"host": [
-						"{{HOST}}{{API}}"
-					],
-					"path": [
-						"italy",
-						"2022"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "DELETE /emigrants/spain/2019",
 			"event": [
 				{
@@ -584,12 +584,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}{{API}}/spain/2019",
+					"raw": "{{HOST}}{{API}}/españa/2019",
 					"host": [
 						"{{HOST}}{{API}}"
 					],
 					"path": [
-						"spain",
+						"españa",
 						"2019"
 					]
 				}
