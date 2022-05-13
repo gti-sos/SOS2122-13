@@ -82,16 +82,16 @@
                 aux = [];
 
                 aux.push(json[i].year);
-                aux.push(json[i].percentages);
+                aux.push(json[i].men);
                 DataMenE.push(aux);
 
                 aux.push(json[i].year);
-                aux.push(json[i].men);
+                aux.push(json[i].women);
                 DataWomenE.push(aux);
 
                 aux = [];
                 aux.push(json[i].year);
-                aux.push(json[i].women);
+                aux.push(json[i].percentages);
                 DataPercentagesE.push(aux);
                
             }

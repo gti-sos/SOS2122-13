@@ -570,7 +570,7 @@ module.exports.register = (app, db) => {
         var Country = req.params.country;   
         var Year = req.params.year;
     
-        db.find({country: Country, year: Year}, {}, (err, filteredImmigrants)=>{
+        db.find({country: Country, year: parseInt(Year)}, {}, (err, filteredImmigrants)=>{
 
             if (err){
                 res.sendStatus(500,"ERROR");
