@@ -7,7 +7,6 @@
 	import EditEmigrants from "./emigrants/EditEmigrants.svelte";
 	import ImmigrantsGraph from "./immigrants/ImmigrantsGraph2.svelte";
 	import EmigrantsGraph from "./emigrants/EmigrantsGraph.svelte";
-	import EmigrantsGraph2 from "./emigrants/EmiGraph2.svelte";
 	import GeneralGraph from "./Graph.svelte";
 
 	const routes = {
@@ -22,8 +21,7 @@
 
 		"/emigrants" : Emigrants,
 		"/emigrants/:country/:year" : EditEmigrants,
-		"/emigrants-graph": EmigrantsGraph,
-		"/emigrants-graph2": EmigrantsGraph2
+		"/emigrants-graph": EmigrantsGraph
 
 	};
 

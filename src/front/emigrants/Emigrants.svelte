@@ -203,33 +203,6 @@
 		}
 	}
 
-	//Búsqueda por país
-	    async function search (sCountry){
-            
-            if(sCountry==null){
-                sCountry="";
-            }
-
-            visible = true;
-            const res = await fetch(BASE_API_URL + "?country="+ sCountry)
-            
-            if (res.ok){
-                const json = await res.json();
-                emigrant = json;
-
-                console.log("Found");
-
-                if(emigrant.length==1){
-
-                    color = "succes"
-                    checkMSG = "Dato encontrado";
-
-                }else{
-                    color = "success"
-                    checkMSG = "Se han encontrado " + emigrant.length + " datos";
-                }
-            }
-    }
 	
 </script>
 
@@ -248,26 +221,6 @@
         </Alert>
 
 		<Table ALIGN="center">
-
-			<thead ALIGN="center">
-				<tr text-align="center">
-					<th >Búsqueda por país: </th>
-				</tr>
-			</thead>
-		
-			<tbody ALIGN="center">
-				<tr>
-					<td><input placeholder="País" type="text" bind:value="{countrySearch}"></td>
-
-				</tr>
-
-			    <tr>
-					<div style="text-align:center">
-						<Button outline color="primary" on:click="{search (countrySearch)}">Buscar</Button>
-					</div>
-				</tr>
-
-			</tbody>
 
 			<thead ALIGN = "center">
 				<tr text-align="center">
