@@ -2,10 +2,13 @@
 const express = require ("express");
 const bodyParser = require("body-parser");
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 const request = require('request');
 
 const port = process.env.PORT || 8083;
+
+
+app.use(cors());
 
 //Base Datos
 const Datastore = require("nedb")
@@ -22,7 +25,7 @@ emigrantsBackendV2.register(app,db_emigrants);
 ///
 
 app.use(bodyParser.json());
-app.use(cors());
+
 
 //Proxy Celia Sánchez Gaitán
 
@@ -33,6 +36,12 @@ app.use(paths2, function(req, res) {
   var url = apiServerHost2 + req.url;
   req.pipe(request(url)).pipe(res);
 });
+
+
+
+
+
+
 
 
 

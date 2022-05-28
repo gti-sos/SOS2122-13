@@ -119,11 +119,17 @@
 
     </div>
 
-    <hr>
-
-    <p>
+    
+    <h2 ALIGN = "center">Integraciones: </h2>
+    <p ALIGN = "center">
+        
         <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/integrations'">Integraciones</button>
     </p>
+
+    <hr>
+    <br>
+    <br>
+    <br>
 
   
 </main>
