@@ -46,6 +46,10 @@
             <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/Externa1'">Gráfica</button>
             <h3>Uso API Externa 2</h3>
             <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/Externa2'">Gráfica</button>
+            <h3>Uso API Carbón</h3>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/UsoCoalStats'">Gráfica</button>
+            <h3>Uso API Defensa</h3>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/UsoDefenseSpentStats'">Gráfica</button>
             <hr>
             
 

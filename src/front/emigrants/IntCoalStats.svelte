@@ -30,11 +30,11 @@
 
             const json = await res_emigrants.json();
             const json_reg = await res_coal.json();
-            const campos = [];
+            const countries = [];
 
             for(let i = 0; i<json_reg.length;i++){
 
-                campos.push(json_reg[i].country + "/" + json_reg[i].year);
+                countries.push(json_reg[i].country + "/" + json_reg[i].year);
             }
             for(let i = 0; i<json.length; i++){
 
@@ -42,8 +42,8 @@
 
                 campos.push(fecha);
 
-                if(campos.includes(fecha)){
-                    let index = campos.indexOf(fecha);
+                if(countries.includes(fecha)){
+                    let index = countries.indexOf(fecha);
 
                     productions.push(json_reg[index].productions);
                     exports.push(json_reg[index].exports);
