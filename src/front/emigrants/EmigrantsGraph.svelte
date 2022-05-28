@@ -1,32 +1,32 @@
 <script>
-    import{Nav, NavItem, NavLink } from "sveltestrap";
     import { onMount } from "svelte";
     const BASE_API_PATH = "/api/v2";
+    
     let emigrantsData=[];
     let emigrantsCountryYear = [];
     let men = [];
     let women = [];
     let percentages = [];
  
-	let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
-    let cargados = false;
+    let LoadDatos = false;
 
     async function loadChart() {
         
-        console.log("Fetching data...");
+        console.log("Fetching emigrants stats...");
         const res = await fetch(BASE_API_PATH + "/emigrants");
        
         if (res.ok) {
             const data = await res.json();
             emigrantsData = data;
-            emigrantsData.forEach(stat => {
-            emigrantsCountryYear.push(stat.country+"-"+stat.year);
+            emigrantsData.forEach(stat => { 
+            emigrantsCountryYear.push(stat.country + "-" + stat.year); 
+
             men.push(parseInt(stat.men));
             women.push(parseInt(stat.women));
             percentages.push(parseFloat(stat.percentages));
             });
-
-            cargados=true;
+            
+            LoadDatos=true;
         }
         
     console.log("inequality Chart data: " + emigrantsData);
@@ -37,6 +37,9 @@
     },
     title: {
         text: 'Emigrantes'
+    },
+    subtitle: {
+        text: 'Librería Highcharts'
     },
     
     xAxis: {
@@ -104,14 +107,10 @@
 </svelte:head>
 
 <main>
-    <Nav>
-        <NavItem>
-          <NavLink href="#/info">Página Principal</NavLink>
-        </NavItem>
-    </Nav>
+    
     <figure class="highcharts-figure">
         <div id="container"></div>
-        <p class="highcharts-description">
+        <p class="highcharts-description" ALIGN = "center">
             Gráfico de barras que muestra el número de emigrantes de cada país.
         </p>
     </figure>

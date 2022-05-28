@@ -11,6 +11,7 @@
             <h2>Project description: </h2>
             <br>
             <p>
+                <!-- svelte-ignore a11y-missing-attribute -->
                 <img src="https://www.pintores-decoradores.com/wp-content/uploads/2017/07/mapamundi.jpg" > 
             </p>
 
@@ -84,7 +85,7 @@
 
         <div class= "emigrants" ALIGN = "center">
 
-            <h1>Emigrantes</h1>
+            <h1>Inmigrantes</h1>
             <p>(developed by <a href="https://github.com/ThomasTejGor">
                 [Thomas Tejeda Gordon])</a>
             </p>
@@ -98,7 +99,7 @@
 
             <h2>Front End: </h2>
             <br>
-            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/immigrants-stats'">Front End</button>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/immigrants'">Front End</button>
             <hr>
 
             <h2>API: </h2>
@@ -119,6 +120,10 @@
     </div>
 
     <hr>
+
+    <p>
+        <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/integrations'">Integraciones</button>
+    </p>
 
   
 </main>

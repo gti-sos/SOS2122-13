@@ -14,7 +14,6 @@
 	let limit = 15;
 	let from = null;
 	let to = null;
-	let countrySearch = "";
 
 	let newData = {
 		country: "",
@@ -35,6 +34,7 @@
     async function getData(){
 
         console.log("Fetching emigrants data....");
+		
 		let cadena = `/api/v2/emigrants?limit=${limit}&&offset=${offset*10}&&`;
 
 		if (from != null) {
