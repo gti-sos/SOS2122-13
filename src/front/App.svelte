@@ -19,7 +19,7 @@
 	import EditImmigrants from "./immigrants/EditImmigrants.svelte";
 	
 	import GeneralGraph from "./Graph.svelte";
-	import GeneralGraph1 from "./Graph1.svelte";
+	//import GeneralGraph1 from "./Graph1.svelte";
 
 	import Integrations from "./Integrations.svelte";
 
@@ -28,7 +28,7 @@
 		"/info": Home,
 
 		"/graph/:country": GeneralGraph,
-		"/analytics": GeneralGraph1,
+		//"/analytics": GeneralGraph1,
 
 		"/integrations": Integrations,
 
