@@ -11,7 +11,7 @@
 
 	let limitPages = 0;
 	let offset = 0;
-	let limit = 15;
+	let limit = 10;
 	let from = null;
 	let to = null;
 
@@ -129,10 +129,10 @@
 				else if(res.status == 400){
 				console.log("ERROR");
 				checkMSG = "Ya existe";
-				}
+				}s
 				
 				else if(res.status == 409){
-				console.log("ERROR");
+				console.log("ERRORRR");
 				checkMSG = "Los datos son incorrectos";
 
 				}
