@@ -73,7 +73,7 @@
 
 <svelte:head>
 
-    <link rel="stylesheet" href="./celsangai/c3.css">
+    <link rel="stylesheet" href="./celiaEmi/c3.css">
 </svelte:head>
 
 <main>
