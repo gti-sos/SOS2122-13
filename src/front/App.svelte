@@ -16,9 +16,14 @@
 	import Externa1 from "./emigrants/ApiExterna1.svelte";
 	
 	
-	import ImmigrantsGraph from "./immigrants/ImmigrantsGraph2.svelte";
+	import ImmigrantsGraph from "./immigrants/ImmigrantsHighCharts.svelte";
+	import ZingImmigrantsGraph from "./immigrants/ImmigrantsZingCharts.svelte";
 	import Immigrants from './immigrants/Immigrants.svelte';
 	import EditImmigrants from "./immigrants/EditImmigrants.svelte";
+	import ExternaCovid from "./immigrants/ApiExternaCovid.svelte";
+	import ExternaFutbol from "./immigrants/ApiExternaFutbol.svelte";
+	import IntCancerStats from "./immigrants/IntegracionApiCancer.svelte";
+	import IntDevicesStats from "./immigrants/IntegracionApiDispositivos.svelte";
 	
 	import GeneralGraph from "./GraphComun.svelte";
 
@@ -36,6 +41,11 @@
 		"/immigrants" : Immigrants,
 		"/immigrants/:country/:year" : EditImmigrants,
 		"/immigrants-graph": ImmigrantsGraph,
+		"/immigrants-graph-zing": ZingImmigrantsGraph,
+		"/ExternaCovid": ExternaCovid,
+		"/ExternaFutbol": ExternaFutbol,
+		"/IntCancerStats": IntCancerStats,
+		"/IntDevicesStats": IntDevicesStats,
 
 		"/emigrants" : Emigrants,
 		"/emigrants/:country/:year" : EditEmigrants,

@@ -43,6 +43,41 @@ app.use(paths2, function(req, res) {
 });
 
 
+//Proxys Thomas Tejeda Gordon
+
+var paths1 ='/remoteApiCancerDeaths/loadInitialData';
+var apiServerHost1 = 'https://sos2122-24.herokuapp.com/api/v1/cancerdeaths-stats/loadInitialData';
+
+app.use(paths1, function(req, res) {
+  var url = apiServerHost1 + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
+var paths2 ='/remoteApiCancerDeaths';
+var apiServerHost2 = 'https://sos2122-24.herokuapp.com/api/v1/cancerdeaths-stats';
+
+app.use(paths2, function(req, res) {
+  var url = apiServerHost2 + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
+var paths3 ='/remoteApiTechnologyDevices/loadInitialData';
+var apiServerHost3 = 'http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/loadInitialData';
+
+app.use(paths3, function(req, res) {
+  var url = apiServerHost3 + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
+var paths4 ='/remoteApiTechnologyDevices';
+var apiServerHost4 = 'http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats';
+
+app.use(paths4, function(req, res) {
+  var url = apiServerHost4 + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
+
 
 //Backend Thomas Tejeda Gordon
 const immigrantsBackendV1 = require("./src/back/immigrants/v1/index.js");

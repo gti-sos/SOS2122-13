@@ -69,6 +69,33 @@
             </p>
         
             <hr>
+            <h2>Gráfica Individual: </h2>
+            <br>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/immigrants-graph'">Gráfica Inmigrantes Highcharts</button>
+            <br>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/immigrants-graph-zing'">Gráfica Emigrantes ZingChart</button>
+            <hr>
+
+            <h2>Gráfica Grupal (Integración Emigrantes e Inmigrantes): </h2>
+            <br>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/analytics'">Gráfica Grupal</button>
+            <hr>
+
+            <h1>Integraciones</h1>
+            <br>
+            <h3>Integración Inmigración y Cancer</h3>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/IntCancerStats'">Gráfica</button>
+            <h3>Integración Inmigración y Dispositivos Contaminantes</h3>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/IntDevicesStats'">Gráfica</button>
+            <hr>
+
+            <h1>Usos</h1>
+            <br>
+            <h3>Uso API Externa 1 </h3>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/ExternaCovid'">Gráfica</button>
+            <h3>Uso API Externa 2</h3>
+            <button onclick="window.location.href='https://sos2122-13.herokuapp.com/#/ExternaFutbol'">Gráfica</button>
+            <hr>
             
            
 
