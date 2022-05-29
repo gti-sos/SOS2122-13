@@ -39,7 +39,8 @@
     "request": "^2.88.2",
     "require": "^2.4.20",
     "svelte-spa-router": "^3.2.0",
-    "sveltestrap": "^5.9.0"
+    "sveltestrap": "^5.9.0",
+    "zingchart": "^2.9.9"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

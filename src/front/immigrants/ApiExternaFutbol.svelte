@@ -103,6 +103,12 @@ onMount(loadGraph);
     <head>
         <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
       </head>
+
+      <div align = "center">
+        <h2>
+          Gráfica que muestra los datos de partidos de un equipo
+        </h2>
+      </div>
     <div id="myChart"></div>
 
 
