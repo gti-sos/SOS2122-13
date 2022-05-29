@@ -91,7 +91,7 @@
                 type: "bar",
             },
             title: {
-                text: "Integración Emigrantes y Carbón",
+                text: "Estadísticas de Emigración y Carbón",
             },
             subtitle: {
                 text: "Integración API SOS 1",

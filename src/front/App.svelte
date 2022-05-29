@@ -10,16 +10,17 @@
 	import IntCoalStats from "./emigrants/IntCoalStats.svelte";
 	import UsoDefenseSpentStats from "./emigrants/UsoDefenseSpentStats.svelte";
 	import IntDefenseSpentStats from "./emigrants/IntDefenseSpentStats.svelte";
+	import IntPollutionStats from "./emigrants/IntPollutionStats.svelte";
 	import Externa1 from "./emigrants/ApiExterna1.svelte";
 	import Externa2 from "./emigrants/ApiExterna2.svelte";
+	import Externa3 from "./emigrants/ApiExterna3.svelte";
 	
-
+	
 	import ImmigrantsGraph from "./immigrants/ImmigrantsGraph2.svelte";
 	import Immigrants from './immigrants/Immigrants.svelte';
 	import EditImmigrants from "./immigrants/EditImmigrants.svelte";
 	
-	import GeneralGraph from "./Graph.svelte";
-	//import GeneralGraph1 from "./Graph1.svelte";
+	import GeneralGraph from "./GraphComun.svelte";
 
 	import Integrations from "./Integrations.svelte";
 
@@ -28,7 +29,7 @@
 		"/info": Home,
 
 		"/graph/:country": GeneralGraph,
-		//"/analytics": GeneralGraph1,
+		"/analytics": GeneralGraph,
 
 		"/integrations": Integrations,
 
@@ -44,8 +45,10 @@
 		"/IntCoalStats": IntCoalStats,
 		"/UsoDefenseSpentStats": UsoDefenseSpentStats,
 		"/IntDefenseSpentStats": IntDefenseSpentStats,
+		"/IntPollutionStats": IntPollutionStats,
 		"/Externa1": Externa1,
-		"/Externa2": Externa2
+		"/Externa2": Externa2,
+		"/Externa3": Externa3
 		
 	};
 

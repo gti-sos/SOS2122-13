@@ -13,28 +13,27 @@
     let women = ["Mujeres Emigrantes"];
     let percentages = ["Porcentaje de Emigrantes"];
 
-    let spen_mill_eur = ["Gasto en millones"];
-    let public_percent = ["% en Gasto público"];
-    let pib_percent = ["% PIB"];
+    let plastic_waste = ["Residuos Plásticos"];
+    let gaseous_waste = ["Residuos Gaseosos"];
+    let collected_waste = ["Residuos Recogidos"];
 
     async function getData(){
         
         let load1 = await fetch(`/api/v2/emigrants/loadInitialData`);
-        let load2 = await fetch(`/remoteApiDefense/loadInitialData`);
+        let load2 = await fetch(`/remoteApiPollution/loadInitialData`);
 
         await delay(1000);
 
         let res_emigrants;
-        let res_defense;
+        let res_pollution;
 
         res_emigrants = await fetch(`/api/v2/emigrants`);
-        res_defense = await fetch(`/remoteApiDefense`);
+        res_pollution = await fetch(`/remoteApiPollution`);
 
-        if (res_emigrants.ok && res_defense.ok) {
+        if (res_emigrants.ok && res_pollution.ok) {
 
             const json = await res_emigrants.json();
-            const json_reg = await res_defense.json();
-            let rangoMax = 5;
+            const json_reg = await res_pollution.json();
 
             const countries = [];
 
@@ -48,15 +47,15 @@
 
                 if(countries.includes(fecha)){
                     let index = countries.indexOf(fecha);
-                    spen_mill_eur.push(json_reg[index].spen_mill_eur);
-                    public_percent.push(json_reg[index].public_percent);
-                    pib_percent.push(json_reg[index].pib_percent);
+                    plastic_waste.push(json_reg[index].plastic_waste);
+                    gaseous_waste.push(json_reg[index].gaseous_waste);
+                    collected_waste.push(json_reg[index].collected_waste);
                     json_reg.splice(index, 1);
 
                 }else{
-                    spen_mill_eur.push(0);
-                    public_percent.push(0);
-                    pib_percent.push(0);
+                    plastic_waste.push(0);
+                    gaseous_waste.push(0);
+                    collected_waste.push(0);
                 }
                 women.push(json[i].women);
                 percentages.push(json[i].percentages);
@@ -65,14 +64,16 @@
             for(let i = 0; i<json_reg.length; i++){
 
                 campos.push(json_reg[i].country+"/"+json_reg[i].year);
-                spen_mill_eur.push(json_reg[i].spen_mill_eur);
-                public_percent.push(json_reg[i].public_percent);
-                pib_percent.push(json_reg[i].pib_percent);
+                plastic_waste.push(json_reg[i].plastic_waste);
+                gaseous_waste.push(json_reg[i].gaseous_waste);
+                collected_waste.push(json_reg[i].collected_waste);
+
                 women.push(0);
                 percentages.push(0);
                 men.push(0);
             }
             loadGraph();
+
         }else{
             errorC = 200.4;
             loadGraph();
@@ -82,13 +83,13 @@
     async function loadGraph() {
         Highcharts.chart("container", {
             chart: {
-                type: "lollipop",
+                type: "spline",
             },
             title: {
-                text: "Estadísticas de gasto en defensa",
+                text: "Estadísticas de Emigración y Contaminación",
             },
             subtitle: {
-                text: "Inegración API SOS 2",
+                text: "Inegración API SOS 3",
             },
             yAxis: {
                 title: {
@@ -120,16 +121,16 @@
                     data: percentages,
                 },
                 {
-                    name: "spen_mill_eur",
-                    data: spen_mill_eur,
+                    name: "Rediduos Plásticos",
+                    data: plastic_waste,
                 },
                 {
-                    name: "public_percent",
-                    data: public_percent,
+                    name: "Residuos Gaseosos",
+                    data: gaseous_waste,
                 },
                 {
-                    name: "pib_percent",
-                    data: pib_percent,
+                    name: "Residuos Recogidos",
+                    data: collected_waste,
                 },
             ],
             responsive: {

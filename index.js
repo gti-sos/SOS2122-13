@@ -2,12 +2,12 @@
 const express = require ("express");
 const bodyParser = require("body-parser");
 const app = express();
-const cors = require("cors");
+const cors = require('cors');
 const request = require('request');
 
 const port = process.env.PORT || 8083;
 
-
+app.use(bodyParser.json());
 app.use(cors());
 
 //Base Datos
@@ -24,24 +24,23 @@ const emigrantsBackendV2 = require("./src/back/emigrants/v2/index.js");
 emigrantsBackendV2.register(app,db_emigrants);
 ///
 
-app.use(bodyParser.json());
-
-
 //Proxy Celia Sánchez Gaitán
 
-var paths2='/remoteApiDefense';
-var apiServerHost2 = 'https://sos2122-26.herokuapp.com/api/v2/defense-spent-stats';
+var paths1 ='/remoteApiPollution/loadInitialData';
+var apiServerHost1 = 'https://sos2122-12.herokuapp.com/api/v2/pollution-stats/loadinitialdata';
+
+app.use(paths1, function(req, res) {
+  var url = apiServerHost1 + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
+var paths2 ='/remoteApiPollution';
+var apiServerHost2 = 'https://sos2122-12.herokuapp.com/api/v2/pollution-stats';
 
 app.use(paths2, function(req, res) {
   var url = apiServerHost2 + req.url;
   req.pipe(request(url)).pipe(res);
 });
-
-
-
-
-
-
 
 
 

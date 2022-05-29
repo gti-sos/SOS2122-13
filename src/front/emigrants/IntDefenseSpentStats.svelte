@@ -93,7 +93,7 @@
                 type: "column",
             },
             title: {
-                text: "Estadísticas de gasto en defensa",
+                text: "Estadísticas de Emigración y Gastos en Defensa",
             },
             subtitle: {
                 text: "Inegración API SOS 2",
