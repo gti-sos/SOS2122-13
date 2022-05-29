@@ -101,6 +101,12 @@
 </svelte:head>
 
 <main>
+
+    <div align = "center">
+        <h2>
+          Integracion estadísticas Inmigrantes y dispositivos que contaminan
+        </h2>
+      </div>
     <div id="myChart" align="center"></div>
 
 </main>

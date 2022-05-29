@@ -69,7 +69,7 @@
             axis: {
                 x: {
                 type: "category",
-                categories: campos
+                categories: pais_año
                 }
             },
             data: {
@@ -100,6 +100,12 @@
 </svelte:head>
 
 <main>
+
+    <div align = "center">
+        <h2>
+          Integracion estadísticas Inmigrantes y muertes por cancer
+        </h2>
+      </div>
     <div id="myChart" align="center"></div>
 
 </main>

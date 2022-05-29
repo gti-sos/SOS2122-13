@@ -1,5 +1,6 @@
 <script>
   import{Nav, NavItem, NavLink } from "sveltestrap";
+  import {onMount} from 'svelte';
   const BASE_API_PATH = "/api/v2";
   let immigrantsData=[];
   let immigrantsCountryYear = [];
@@ -8,7 +9,7 @@
   let percentages = [];
 
   
-  async function loadChart() {
+  async function loadData() {
       console.log("Fetching data...");
       const res = await fetch(BASE_API_PATH + "/immigrants");
      
@@ -21,12 +22,17 @@
           women.push(parseInt(stat.women));
           percentages.push(parseFloat(stat.percentages));
           });
-          cargados=true;
+         
       }
       
   console.log("immigrants: " + immigrantsData);
-          
-  Highcharts.chart('container', {
+    
+  
+  }
+  loadData();
+
+  async function loadGraph(){
+    Highcharts.chart('container', {
     chart: {
         type: 'column'
     },
@@ -68,7 +74,10 @@
         data: percentages
     }]
 });
+
   }
+
+  onMount(loadGraph);
 </script>
 
 <svelte:head>
@@ -78,7 +87,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script
   src="https://code.highcharts.com/modules/accessibility.js"
-  on:load={loadChart}></script>
+  on:load={loadGraph}></script>
 </svelte:head>
 
 <main>
