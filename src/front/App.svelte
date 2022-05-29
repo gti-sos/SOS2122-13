@@ -11,9 +11,9 @@
 	import UsoDefenseSpentStats from "./emigrants/UsoDefenseSpentStats.svelte";
 	import IntDefenseSpentStats from "./emigrants/IntDefenseSpentStats.svelte";
 	import IntPollutionStats from "./emigrants/IntPollutionStats.svelte";
-	import Externa1 from "./emigrants/ApiExterna1.svelte";
-	import Externa2 from "./emigrants/ApiExterna2.svelte";
 	import Externa3 from "./emigrants/ApiExterna3.svelte";
+	import Externa2 from "./emigrants/ApiExterna2.svelte";
+	import Externa1 from "./emigrants/ApiExterna1.svelte";
 	
 	
 	import ImmigrantsGraph from "./immigrants/ImmigrantsGraph2.svelte";

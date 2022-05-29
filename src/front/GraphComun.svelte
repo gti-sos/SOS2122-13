@@ -75,7 +75,7 @@
             Highcharts.chart('container', {
 
                 chart: {
-                    type: 'lollipop'
+                    type: 'area'
                 },
                 
                 title: {
