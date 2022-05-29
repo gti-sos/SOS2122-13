@@ -1,6 +1,7 @@
 <script>
 
     const BASE_API_PATH = "/api/v2";
+    import { onMount } from 'svelte';
     
     let Data=[];
     let countries = [];
@@ -13,7 +14,7 @@
 
     async function loadChart() {
 
-        console.log("Fetching emigrants data...");
+        
         const res = await fetch(BASE_API_PATH + "/emigrants");
        
         if (res.ok) {
@@ -74,6 +75,7 @@
       }]
   });
     }
+    //onMount(loadChart); 
   </script>
   
   <svelte:head>
@@ -84,6 +86,7 @@
   <script
     src="https://code.highcharts.com/modules/accessibility.js"
     on:load={loadChart}></script>
+    
   </svelte:head>
   
   <main>

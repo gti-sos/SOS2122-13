@@ -29,6 +29,8 @@
 
 	import Integrations from "./Integrations.svelte";
 
+	import About from "./Videos.svelte"
+
 	const routes = {
 
 		"/info": Home,
@@ -37,6 +39,8 @@
 		"/analytics": GeneralGraph,
 
 		"/integrations": Integrations,
+
+		"/about": About,
 
 		"/immigrants" : Immigrants,
 		"/immigrants/:country/:year" : EditImmigrants,

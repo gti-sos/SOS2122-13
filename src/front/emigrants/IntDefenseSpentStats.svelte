@@ -6,9 +6,9 @@
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
     
-    let errorC= 0;
+    
     let campos = [];
-
+    let codigo= 0;
     let men = ["Hombres Emigrantes"];
     let women = ["Mujeres Emigrantes"];
     let percentages = ["Porcentaje de Emigrantes"];
@@ -81,7 +81,7 @@
             loadGraph();
 
         }else{
-            errorC = 200.4;
+            codigo = 200.4;
             await delay(1000);
             loadGraph();
         }
