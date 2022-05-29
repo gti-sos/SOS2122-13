@@ -1,89 +1,68 @@
 <script>
-    import { onMount } from "svelte";
+
     const BASE_API_PATH = "/api/v2";
     
-    let emigrantsData=[];
-    let emigrantsCountryYear = [];
+    let Data=[];
+    let countries = [];
     let men = [];
     let women = [];
     let percentages = [];
  
-    let LoadDatos = false;
+	
+    let load = false;
 
     async function loadChart() {
-        
-        console.log("Fetching emigrants stats...");
+
+        console.log("Fetching emigrants data...");
         const res = await fetch(BASE_API_PATH + "/emigrants");
        
         if (res.ok) {
             const data = await res.json();
-            emigrantsData = data;
-            emigrantsData.forEach(stat => { 
-            emigrantsCountryYear.push(stat.country + "-" + stat.year); 
+            Data = data;
 
+          Data.forEach(stat => {
+            countries.push(stat.country+"-"+stat.year);
             men.push(parseInt(stat.men));
             women.push(parseInt(stat.women));
             percentages.push(parseFloat(stat.percentages));
             });
-            
-            LoadDatos=true;
+
+            load=true;
         }
         
-    console.log("inequality Chart data: " + emigrantsData);
-    
+            
     Highcharts.chart('container', {
-    chart: {
-        type: 'bar'
-    },
-    title: {
-        text: 'Emigrantes'
-    },
-    subtitle: {
-        text: 'Librería Highcharts'
-    },
-    
-    xAxis: {
-        categories: emigrantsCountryYear,
-        title: {
-            text: null
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Population (millions)',
-            align: 'high'
-        },
-        labels: {
-            overflow: 'justify'
-        }
-    },
-    tooltip: {
-        valueSuffix: ' millions'
-    },
-    plotOptions: {
-        bar: {
-            dataLabels: {
-                enabled: true
-            }
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: 80,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor:
-            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-        shadow: true
-    },
-    credits: {
-        enabled: false
-    },
-    series: [{
+      chart: {
+          type: 'bar'
+      },
+      title: {
+          text: 'Número de Emigrantes de cada país'
+      },
+      xAxis: {
+          categories: countries,
+          crosshair: true
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: 'Emigrantes'
+          }
+      },
+      tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+              '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+      },
+      plotOptions: {
+          column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+          }
+      },
+      series: [{
           name: 'Hombres',
           data: men
       }, {
@@ -93,28 +72,45 @@
           name: 'Porcentajes',
           data: percentages
       }]
-});
+  });
     }
-    onMount(loadChart);
-</script>
-
-<svelte:head>
-
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"  on:load={loadChart}></script>
-</svelte:head>
-
-<main>
-    
-    <figure class="highcharts-figure">
-        <div id="container"></div>
-        <p class="highcharts-description" ALIGN = "center">
+  </script>
+  
+  <svelte:head>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script
+    src="https://code.highcharts.com/modules/accessibility.js"
+    on:load={loadChart}></script>
+  </svelte:head>
+  
+  <main>
+  
+    <div>
+        <h2>
+          Emigrantes
+        </h2>
+      </div>
+  
+    <div>
+        <figure class="highcharts-figure">
+          <div id="container" />
+          <p class="highcharts-description">
             Gráfico de barras que muestra el número de emigrantes de cada país.
-        </p>
-    </figure>
-
+          </p>
+        </figure>
+    </div>
+    
+  
+  </main>
+  
+  <style>
+    main {
+        text-align: center;
+        padding: 30px;       
+    }
+    
    
-
-</main>
+  </style>

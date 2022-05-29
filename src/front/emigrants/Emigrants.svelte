@@ -129,7 +129,7 @@
 				else if(res.status == 400){
 				console.log("ERROR");
 				checkMSG = "Ya existe";
-				}s
+				}
 				
 				else if(res.status == 409){
 				console.log("ERRORRR");
