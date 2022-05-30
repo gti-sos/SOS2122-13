@@ -1,5 +1,6 @@
 <script>
     import {onMount} from 'svelte';
+    import{Nav, NavItem, NavLink } from "sveltestrap";
     
 
     let pais_año = [];
@@ -101,6 +102,11 @@
 </svelte:head>
 
 <main>
+    <Nav>
+        <NavItem>
+          <NavLink href="#/info">Página Principal</NavLink>
+        </NavItem>
+    </Nav>
 
     <div align = "center">
         <h2>

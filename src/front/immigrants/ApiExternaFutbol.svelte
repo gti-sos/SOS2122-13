@@ -1,5 +1,6 @@
 <script>
     import {onMount} from 'svelte';
+    import{Nav, NavItem, NavLink } from "sveltestrap";
 
     let myConfig = {};
     let datos = [];
@@ -103,6 +104,12 @@ onMount(loadGraph);
     <head>
         <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
       </head>
+
+      <Nav>
+        <NavItem>
+          <NavLink href="#/info">Página Principal</NavLink>
+        </NavItem>
+    </Nav>
 
       <div align = "center">
         <h2>

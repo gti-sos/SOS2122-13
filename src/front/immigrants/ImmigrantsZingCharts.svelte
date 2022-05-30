@@ -101,5 +101,11 @@
     <head>
        <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
      </head>
+
+     <Nav>
+      <NavItem>
+        <NavLink href="#/info">Página Principal</NavLink>
+      </NavItem>
+  </Nav>
    <div id="myChart"></div>
 </main>

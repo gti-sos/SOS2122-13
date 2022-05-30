@@ -9,7 +9,7 @@
   let percentages = [];
 
   
-  async function loadData() {
+  async function loadGraph() {
       console.log("Fetching data...");
       const res = await fetch(BASE_API_PATH + "/immigrants");
      
@@ -25,14 +25,7 @@
          
       }
       
-  console.log("immigrants: " + immigrantsData);
-    
-  
-  }
-  loadData();
-
-  async function loadGraph(){
-    Highcharts.chart('container', {
+      Highcharts.chart('container', {
     chart: {
         type: 'column'
     },
@@ -75,9 +68,9 @@
     }]
 });
 
-  }
+}
+    
 
-  onMount(loadGraph);
 </script>
 
 <svelte:head>
